@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Contracts\Services\GoogleAnalyticsServiceInterface;
 use Google\Analytics\Data\V1beta\Client\BetaAnalyticsDataClient;
 use Google\Analytics\Data\V1beta\DateRange;
 use Google\Analytics\Data\V1beta\Dimension;
@@ -9,15 +10,31 @@ use Google\Analytics\Data\V1beta\Metric;
 use Google\Analytics\Data\V1beta\RunReportRequest;
 use Illuminate\Support\Facades\Log;
 
-class GoogleAnalyticsService
+class GoogleAnalyticsService implements GoogleAnalyticsServiceInterface
 {
-    // 프로퍼티
+    /**
+     * @var BetaAnalyticsDataClient
+     */
     protected BetaAnalyticsDataClient $client;
+
+    /**
+     * @var string
+     */
     protected string $startDate;
+
+    /**
+     * @var string
+     */
     protected string $endDate;
+     
+    /**
+     * @var string
+     */
     protected string $propertyId;
 
-    // 생성자
+    /**
+     * GoogleAnalyticsService constructor.
+     */
     public function __construct()
     {
         $path = config("googleanalytics.json_path");
@@ -28,7 +45,13 @@ class GoogleAnalyticsService
         $this->startDate = now()->subDays(99)->format('Y-m-d');
         $this->endDate = 'today';
     }
-
+    
+    /**
+     * Google Analytics API
+     * 
+     * @return array
+     * @throws \Exception
+     */
     public function getAnalyticsData(): array
     {
         $urls = [];

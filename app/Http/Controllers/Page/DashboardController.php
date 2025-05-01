@@ -4,16 +4,29 @@ namespace App\Http\Controllers\page;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Contracts\Services\DashboardServiceInterface;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Log;
 
 class DashboardController extends Controller
 {
+    protected $dashboardServiceInterface;
+
+    /**
+     * Create a new class instance.
+     */
+    public function __construct(DashboardServiceInterface $dashboardServiceInterface) {
+        $this->dashboardServiceInterface = $dashboardServiceInterface;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Inertia::render('Dashboard');
+        $data = $this->dashboardServiceInterface->getDashboardData();
+        Log::info('Dashboard data retrieved', $data);
+        return Inertia::render('Dashboard', $data);
     }
 
     /**
