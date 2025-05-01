@@ -6,43 +6,40 @@ use Google\Analytics\Data\V1beta\Client\BetaAnalyticsDataClient;
 use Google\Analytics\Data\V1beta\DateRange;
 use Google\Analytics\Data\V1beta\Dimension;
 use Google\Analytics\Data\V1beta\Metric;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Carbon;
 use Google\Analytics\Data\V1beta\RunReportRequest;
 use Illuminate\Support\Facades\Log;
 
 class GoogleAnalyticsService
 {
-    /**
-     * Create a new class instance.
-     */
+    // 프로퍼티
+    protected BetaAnalyticsDataClient $client;
+    protected string $startDate;
+    protected string $endDate;
+    protected string $propertyId;
+
+    // 생성자
     public function __construct()
     {
-        //
+        $path = config("googleanalytics.json_path");
+        $jsonPath = storage_path($path);
+        $this->propertyId = config("googleanalytics.propoerty_id");
+        $this->client = new BetaAnalyticsDataClient(['credentials' => $jsonPath]);
+
+        $this->startDate = now()->subDays(99)->format('Y-m-d');
+        $this->endDate = 'today';
     }
 
-    public function getAnalyticsData($jsonPath, $propertyId, )
+    public function getAnalyticsData(): array
     {
-        $cacheKey = 'users';
-        $cacheDuration = 60;
-        $limit = 25;
-        $path = config("googleanalytics.json_path");
-
-        $jsonPath = storage_path($path);
-        $propertyId = config("googleanalytics.propoerty_id");
-        $client = new BetaAnalyticsDataClient(['credentials' => $jsonPath]);
-        
         $urls = [];
-        $startDate = today()->subDays(99)->format('Y-m-d');
-        $endDate = 'today';
 
         try {
-            $response = $client->runReport(new RunReportRequest([
-                'property' => 'properties/' . $propertyId,
+            $response = $this->client->runReport(new RunReportRequest([
+                'property' => 'properties/' . $this->propertyId,
                 'date_ranges' => [
                     new DateRange([
-                        'start_date' => $startDate,
-                        'end_date' => $endDate,
+                        'start_date' => $this->startDate,
+                        'end_date' => $this->endDate,
                     ]),
                 ],
                 'dimensions' => [
@@ -65,21 +62,18 @@ class GoogleAnalyticsService
                 ],
             ]));
         } catch (\Exception $e) {
-            Log::error('API ERROR'. $e->getMessage() );
-            return ['test','test'];
+            Log::error('API ERROR: ' . $e->getMessage());
+            return ['error' => 'Analytics API error'];
         }
 
         foreach ($response->getRows() as $row) {
             $data = [
-                // Dimension
                 'pagePath' => $row->getDimensionValues()[0]->getValue(),
                 'deviceCategory' => $row->getDimensionValues()[1]->getValue(),
-                'deviceModel' => $row->getDimensionValues()[1]->getValue(),
-                'country' => $row->getDimensionValues()[2]->getValue(),
-                'city' => $row->getDimensionValues()[3]->getValue(),
-                'dateHourMinute' => $row->getDimensionValues()[4]->getValue(),
-
-                // Metric
+                'deviceModel' => $row->getDimensionValues()[2]->getValue(),
+                'country' => $row->getDimensionValues()[3]->getValue(),
+                'city' => $row->getDimensionValues()[4]->getValue(),
+                'dateHourMinute' => $row->getDimensionValues()[5]->getValue(),
                 'active1DayUsers' => $row->getMetricValues()[0]->getValue(),
                 'active7DayUsers' => $row->getMetricValues()[1]->getValue(),
                 'active28DayUsers' => $row->getMetricValues()[2]->getValue(),
@@ -91,6 +85,7 @@ class GoogleAnalyticsService
             ];
             $urls[] = $data;
         }
+
         return $urls;
     }
 }
