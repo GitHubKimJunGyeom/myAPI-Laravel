@@ -5,7 +5,15 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
+import { 
+        Folder, 
+        LayoutGrid,
+        FileUser,
+        NotebookTabs,
+        Camera,
+        ExternalLink,
+        TvMinimalPlay
+    } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
@@ -14,19 +22,51 @@ const mainNavItems: NavItem[] = [
         href: '/dashboard',
         icon: LayoutGrid,
     },
+    {
+        title: 'KJK-Portfolio',
+        href: '/dashboard',
+        icon: FileUser,
+    },
+    {
+        title: 'Log&List',
+        href: '/dashboard',
+        icon: NotebookTabs
+    },
+    
 ];
 
 const footerNavItems: NavItem[] = [
+    {   
+        title: 'KJK-Portfolio',
+        href: 'https://github.com/GitHubKimJunGyeom',
+        icon: FileUser,
+    },  
+    {   
+        title: 'Log&List',
+        href: 'https://github.com/GitHubKimJunGyeom',
+        icon: NotebookTabs,
+    },  
+    {
+        title: 'LinkedIn',
+        href: 'https://linkedin.com/in/jungyeom-kim-63625130a',
+        icon: ExternalLink,
+    },
     {
         title: 'Github Repo',
-        href: 'https://github.com/laravel/vue-starter-kit',
+        href: 'https://github.com/GitHubKimJunGyeom',
         icon: Folder,
     },
     {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits',
-        icon: BookOpen,
+        title: 'Instagram',
+        href: 'https://www.instagram.com/tokyo_kim90/',
+        icon: Camera,
     },
+    {
+        title: 'Youtube',
+        href: 'https://www.youtube.com/@cento7517',
+        icon: TvMinimalPlay,
+    },
+
 ];
 </script>
 
@@ -50,7 +90,7 @@ const footerNavItems: NavItem[] = [
 
         <SidebarFooter>
             <NavFooter :items="footerNavItems" />
-            <NavUser />
+            <!-- <NavUser /> -->
         </SidebarFooter>
     </Sidebar>
     <slot />

@@ -9,6 +9,14 @@ const breadcrumbs: BreadcrumbItem[] = [
         title: 'Dashboard',
         href: '/dashboard',
     },
+    {
+        title: 'KJK-Portfolio',
+        href: '/dashboard',
+    },
+    {
+        title: 'Log&List',
+        href: '/dashboard',
+    },
 ];
 
 defineProps({
