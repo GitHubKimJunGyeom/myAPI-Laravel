@@ -24,7 +24,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $analyticsData = $this->dashboardServiceInterface->getDashboardData();
+        $analyticsData = $this->dashboardServiceInterface->getDimensionsData();
         Log::info('Dashboard data', $analyticsData);
         return Inertia::render('Dashboard', $analyticsData);
     }

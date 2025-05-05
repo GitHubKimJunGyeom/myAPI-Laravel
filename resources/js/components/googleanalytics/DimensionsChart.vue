@@ -89,15 +89,16 @@ const chartOptions = {
         text: 'Date',
       },
     },
-  },
+  }
 } as const;
 
 </script>
 
 <template>
     <Line 
-    :data="chartData" 
-    :options="chartOptions" />
+      :data="chartData" 
+      :options="chartOptions" 
+    />
 </template>
   
 

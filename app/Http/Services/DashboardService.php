@@ -27,7 +27,7 @@ class DashboardService implements DashboardServiceInterface
      *
      * @return array
      */
-    public function getDashboardData(): array
+    public function getDimensionsData(): array
     { 
         $kjkPortfolioDimensionsData = $this->googleAnalyticsServiceInterface->getKjkPortfolioDimensionsData();
         $logAndListDimensionsData = $this->googleAnalyticsServiceInterface->getLogAndListDimensionsData();

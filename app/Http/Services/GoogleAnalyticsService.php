@@ -8,6 +8,8 @@ use Google\Analytics\Data\V1beta\DateRange;
 use Google\Analytics\Data\V1beta\Dimension;
 use Google\Analytics\Data\V1beta\Metric;
 use Google\Analytics\Data\V1beta\RunReportRequest;
+use Google\Analytics\Data\V1beta\OrderBy;
+use Google\Analytics\Data\V1beta\OrderBy\DimensionOrderBy;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cache;
 use Google\Protobuf\Internal\RepeatedField;
@@ -107,13 +109,16 @@ class GoogleAnalyticsService implements GoogleAnalyticsServiceInterface
     private function getAnalyticsData(array $propertyList): void
     {
         Log::info('getAnalyticsData');
+
         $this->dimensionsData = [];
         $this->metricsData = [];
+
         foreach ($propertyList as $key => $propertyId) {
-            Log::info('propertyId: ' . $propertyId);
+            Log::info("propertyId: {$propertyId}");
+
             try {
                 $response = $this->client->runReport(new RunReportRequest([
-                    'property' => 'properties/' . $propertyId,
+                    'property' => "properties/{$propertyId}",
                     'date_ranges' => [
                         new DateRange([
                             'start_date' => $this->startDate,
@@ -121,9 +126,7 @@ class GoogleAnalyticsService implements GoogleAnalyticsServiceInterface
                         ]),
                     ],
                     'dimensions' => [
-                        // 수집한 날짜
                         new Dimension(['name' => 'date']),
-                        // 로컬 호스트의 경우 수집하지 않기 위해 수집
                         new Dimension(['name' => 'fullPageUrl']),
                     ],
                     'metrics' => [
@@ -136,15 +139,23 @@ class GoogleAnalyticsService implements GoogleAnalyticsServiceInterface
                         new Metric(['name' => 'screenPageViews']),
                         new Metric(['name' => 'scrolledUsers']),
                     ],
+                    'order_bys' => [
+                        new OrderBy([
+                            'dimension' => new DimensionOrderBy([
+                                'dimension_name' => 'date',
+                            ]),
+                            'desc' => false,
+                        ]),
+                    ],
                 ]));
 
                 $this->storeAnalyticsData($key, $response->getRows());
+
             } catch (\Exception $e) {
-                Log::error('API ERROR: ' . $e->getMessage());
-                throw new \Exception("Error Processing Request: " . $e->getMessage(), $e->getCode(), $e);
+                Log::error("API ERROR: " . $e->getMessage());
+                throw new \Exception( "Error Processing Request: " . $e->getMessage(), $e->getCode(), $e);
             }
         }
-
     }
     
     /**
@@ -160,7 +171,7 @@ class GoogleAnalyticsService implements GoogleAnalyticsServiceInterface
 
         foreach ($rows as $row) {
             $date = $row->getDimensionValues()[0]->getValue();  // YYYYMMDD
-            $formattedDate = substr($date, 0, 4) . '-' . substr($date, 4, 2) . '-' . substr($date, 6, 2);
+            $formattedDate = substr($date, 4, 2) . '-' . substr($date, 6, 2);  // MM-DD
             
             $fullPageUrl = $row->getDimensionValues()[1]->getValue();
             
@@ -190,11 +201,8 @@ class GoogleAnalyticsService implements GoogleAnalyticsServiceInterface
         
             // dimensions 집계
             $this->dimensionsData[$key][$formattedDate] = 
-                ($this->dimensionsData[$formattedDate] ?? 0) + $screenPageViews;
+                ($this->dimensionsData[$key][$formattedDate] ?? 0) + $screenPageViews;
         
-            $this->dimensionsData[$key][$formattedDate] = 
-                ($this->dimensionsData[$formattedDate] ?? 0) + $screenPageViews;
-
             // metrics 집계
             $this->metricsData[$key][$formattedDate] = [
                 'active1DayUsers' => ($this->dimensionsData[$key][$formattedDate]['active1DayUsers'] ?? 0),
