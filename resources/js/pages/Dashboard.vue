@@ -2,7 +2,7 @@
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';
-import GoogleAnalyticsChart from '@/components/googleanalytics/chart.vue';
+import GoogleAnalyticsDimensionsChart from '@/components/googleanalytics/DimensionsChart.vue';
 // import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -29,7 +29,7 @@ console.log("projectList",projectList.kjkPortfolioDimensionsData)
                     v-for="(projectData, key) in projectList"
                     :key="key"
                 >
-                    <GoogleAnalyticsChart 
+                    <GoogleAnalyticsDimensionsChart
                         :chartData="projectData"
                         :projectName="key"
                     />
