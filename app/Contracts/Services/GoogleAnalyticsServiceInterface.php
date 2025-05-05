@@ -4,14 +4,16 @@ namespace App\Contracts\Services;
 
 interface GoogleAnalyticsServiceInterface
 {
-    //kjk-portfolio
-    public function getKjkPortfolioData(): array;
+    //kjk-portfolio(Dimensions)
+    public function getKjkPortfolioDimensionsData(): array;
     
-    // Log&List
-    public function getLogAndListData(): array;
+    // Log&List(Dimensions)
+    public function getLogAndListDimensionsData(): array;
+
+    //kjk-portfolio(Metric)
+    public function getKjkPortfolioMetricData(): array;
     
-    /**
-     * Google Analytics API
-     */
-    public function getAnalyticsData(string $propertyId): array;
+    // Log&List(Metric)
+    public function getLogAndListMetricsData(): array;
+    
 }

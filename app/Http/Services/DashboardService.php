@@ -28,11 +28,16 @@ class DashboardService implements DashboardServiceInterface
      * @return array
      */
     public function getDashboardData(): array
-    {
-        $data = $this->googleAnalyticsServiceInterface->getKjkPortfolioData();
-        Log::info('Google Analytics Data', $data);
+    { 
+        $kjkPortfolioDimensionsData = $this->googleAnalyticsServiceInterface->getKjkPortfolioDimensionsData();
+        $logAndListDimensionsData = $this->googleAnalyticsServiceInterface->getLogAndListDimensionsData();
+        
+        Log::info('KJK-Portfolio Google Analytics Data', $kjkPortfolioDimensionsData);
+        Log::info('Log&List Google Analytics Data', $logAndListDimensionsData);
+        
         return [
-            'analyticsData' => $data,
+            'kjkPortfolioDimensionsData' => $kjkPortfolioDimensionsData,
+            'logAndListDimensionsData' => $logAndListDimensionsData,
         ];
     }
 }
