@@ -90,14 +90,14 @@ class GoogleAnalyticsService implements GoogleAnalyticsServiceInterface
     public function getKjkPortfolioMetricData(): array
     {
         Log::info('getKjkPortfolioMetricData');
-        return $this->metricsData;
+        return $this->metricsData['kjk_portfolio'] ?? [];
     }
 
     // Log&List(Metric)
     public function getLogAndListMetricsData(): array
     {
         Log::info('getLogAndListMetricsData');
-        return $this->metricsData;
+        return $this->metricsData['log_and_list'] ?? [];
     }
     
     /**
@@ -205,14 +205,14 @@ class GoogleAnalyticsService implements GoogleAnalyticsServiceInterface
         
             // metrics 집계
             $this->metricsData[$key][$formattedDate] = [
-                'active1DayUsers' => ($this->dimensionsData[$key][$formattedDate]['active1DayUsers'] ?? 0),
-                'active7DayUsers' => ($this->dimensionsData[$key][$formattedDate]['active7DayUsers'] ?? 0),
-                'active28DayUsers' => ($this->dimensionsData[$key][$formattedDate]['active28DayUsers'] ?? 0),
-                'activeUsers' => ($this->dimensionsData[$key][$formattedDate]['activeUsers'] ?? 0),
-                'averageSessionDuration' => ($this->dimensionsData[$key][$formattedDate]['averageSessionDuration'] ?? 0),
-                'newUsers' => ($this->dimensionsData[$key][$formattedDate]['newUsers'] ?? 0) + $data['newUsers'],
-                'screenPageViews' => ($this->dimensionsData[$key][$formattedDate]['screenPageViews'] ?? 0) + $data['screenPageViews'],
-                'scrolledUsers' => ($this->dimensionsData[$key][$formattedDate]['scrolledUsers'] ?? 0) + $data['scrolledUsers'],
+                'active1DayUsers' => ($this->metricsData[$key][$formattedDate]['active1DayUsers'] ?? 0),
+                'active7DayUsers' => ($this->metricsData[$key][$formattedDate]['active7DayUsers'] ?? 0),
+                'active28DayUsers' => ($this->metricsData[$key][$formattedDate]['active28DayUsers'] ?? 0),
+                'activeUsers' => ($this->metricsData[$key][$formattedDate]['activeUsers'] ?? 0),
+                'averageSessionDuration' => ($this->metricsData[$key][$formattedDate]['averageSessionDuration'] ?? 0),
+                'newUsers' => ($this->metricsData[$key][$formattedDate]['newUsers'] ?? 0) + $data['newUsers'],
+                'screenPageViews' => ($this->metricsData[$key][$formattedDate]['screenPageViews'] ?? 0) + $data['screenPageViews'],
+                'scrolledUsers' => ($this->metricsData[$key][$formattedDate]['scrolledUsers'] ?? 0) + $data['scrolledUsers'],
             ];
         
             Log::info('dimensionsData: ' . count($this->dimensionsData));

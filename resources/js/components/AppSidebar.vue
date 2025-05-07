@@ -28,7 +28,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Log&List',
-        href: '/dashboard',
+        href: '/logandlist',
         icon: NotebookTabs
     },
     

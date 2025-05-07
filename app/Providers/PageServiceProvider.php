@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Contracts\Services\DashboardServiceInterface;
+use App\Contracts\Services\LogAndListServiceInterface;
 use App\Http\Services\DashboardService;
+use App\Http\Services\LogAndListService;
 
 class PageServiceProvider extends ServiceProvider
 {
@@ -14,6 +16,7 @@ class PageServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(DashboardServiceInterface::class, DashboardService::class);
+        $this->app->singleton(LogAndListServiceInterface::class, LogAndListService::class);
     }
 
     /**
