@@ -3,7 +3,6 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';
 import GoogleAnalyticsDimensionsChart from '@/components/googleanalytics/DimensionsChart.vue';
-// import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -16,7 +15,6 @@ const projectList = defineProps<{
   kjkPortfolioDimensionsData: Record<string, number>
   logAndListDimensionsData: Record<string, number>
 }>();
-console.log("projectList",projectList.kjkPortfolioDimensionsData)
 </script>
 
 <template>
