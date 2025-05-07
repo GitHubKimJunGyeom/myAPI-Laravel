@@ -75,7 +75,7 @@ const chartOptions = {
     x: {
       title: {
         display: true,
-        text: 'Date',
+        text: 'Metrics',
       },
     },
   },
