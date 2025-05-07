@@ -15,7 +15,8 @@ class DashboardController extends Controller
     /**
      * Create a new class instance.
      */
-    public function __construct(DashboardServiceInterface $dashboardServiceInterface) {
+    public function __construct(DashboardServiceInterface $dashboardServiceInterface) 
+    {
         $this->dashboardServiceInterface = $dashboardServiceInterface;
     }
 
