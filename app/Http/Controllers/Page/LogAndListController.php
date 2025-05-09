@@ -10,11 +10,16 @@ use App\Contracts\Services\LogAndListServiceInterface;
 
 class LogAndListController extends Controller
 {
-    protected $logAndListInterface;
+    /**
+     * The Log&List service instance.
+     *
+     * @var \App\Contracts\Services\LogAndListServiceInterface
+     */
+    protected $logAndListServiceInterface;
 
-    public function __construct(LogAndListServiceInterface $logAndListInterface)
+    public function __construct(LogAndListServiceInterface $logAndListServiceInterface)
     {
-        $this->logAndListInterface = $logAndListInterface;
+        $this->logAndListServiceInterface = $logAndListServiceInterface;
     }
     /**
      * Display a listing of the resource.
@@ -22,7 +27,7 @@ class LogAndListController extends Controller
     public function index()
     {
         //
-        $metricsData = $this->logAndListInterface->getMetricsData();
+        $metricsData = $this->logAndListServiceInterface->getMetricsData();
         Log::info('Log&List metricsData', $metricsData);
         return Inertia::render('LogAndList', $metricsData);
     }

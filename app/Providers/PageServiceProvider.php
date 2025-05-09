@@ -5,8 +5,11 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Contracts\Services\DashboardServiceInterface;
 use App\Contracts\Services\LogAndListServiceInterface;
+use App\Contracts\Services\KJKPortfolioServiceInterface;
 use App\Http\Services\DashboardService;
 use App\Http\Services\LogAndListService;
+use App\Http\Services\KJKPortfolioService;
+
 
 class PageServiceProvider extends ServiceProvider
 {
@@ -16,6 +19,7 @@ class PageServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(DashboardServiceInterface::class, DashboardService::class);
+        $this->app->singleton(KJKPortfolioServiceInterface::class, KJKPortfolioService::class);
         $this->app->singleton(LogAndListServiceInterface::class, LogAndListService::class);
     }
 

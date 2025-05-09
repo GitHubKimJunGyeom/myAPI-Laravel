@@ -23,7 +23,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'KJK-Portfolio',
-        href: '/dashboard',
+        href: '/kjkportfolio',
         icon: FileUser,
     },
     {

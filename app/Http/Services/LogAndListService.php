@@ -18,7 +18,8 @@ class LogAndListService implements LogAndListServiceInterface
     /**
      * Create a new class instance.
      */
-    public function __construct(GoogleAnalyticsServiceInterface $googleAnalyticsServiceInterface) {
+    public function __construct(GoogleAnalyticsServiceInterface $googleAnalyticsServiceInterface) 
+    {
         $this->googleAnalyticsServiceInterface = $googleAnalyticsServiceInterface;
     }
 
