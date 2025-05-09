@@ -5,19 +5,34 @@ namespace App\Http\Controllers\page;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Contracts\Services\DashboardServiceInterface;
+use App\Contracts\Services\LogAndListCommentsServiceInterface;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Log;
 
 class DashboardController extends Controller
 {
+    /**
+     * The dashboard service implementation.
+     *
+     * @var DashboardServiceInterface
+     */
     protected $dashboardServiceInterface;
+
+    /**
+     * The log and list comments service implementation.
+     *
+     * @var LogAndListCommentsServiceInterface
+     */
+    protected $logAndListCommentsServiceInterface;
 
     /**
      * Create a new class instance.
      */
-    public function __construct(DashboardServiceInterface $dashboardServiceInterface) 
+    public function __construct(DashboardServiceInterface $dashboardServiceInterface,
+                                LogAndListCommentsServiceInterface $logAndListCommentsServiceInterface)
     {
         $this->dashboardServiceInterface = $dashboardServiceInterface;
+        $this->logAndListCommentsServiceInterface = $logAndListCommentsServiceInterface;
     }
 
     /**
@@ -26,8 +41,16 @@ class DashboardController extends Controller
     public function index()
     {
         $analyticsData = $this->dashboardServiceInterface->getDimensionsData();
+        $logAndListCommentsList = $this->logAndListCommentsServiceInterface->index();
+        
         Log::info('Dashboard data', $analyticsData);
-        return Inertia::render('Dashboard', $analyticsData);
+        Log::info('Log&List Comments data', $logAndListCommentsList);
+
+        $viewData = [
+            'analyticsData' => $analyticsData,
+            'logAndListCommentsList' => $logAndListCommentsList,
+        ];
+        return Inertia::render('Dashboard', $viewData);
     }
 
     /**
