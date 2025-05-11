@@ -43,9 +43,10 @@
                     <table class="min-w-full table-auto border border-gray-300 text-sm">
                         <thead class="bg-gray-100">
                             <tr>
-                                <th class="border px-4 py-2 text-center">PK</th>
-                                <th class="border px-4 py-2 text-center">nickname</th>
-                                <th class="border px-4 py-2 text-center">content</th>
+                                <th class="border px-4 py-2 text-center">Comment ID</th>
+                                <th class="border px-4 py-2 text-center">User ID</th>
+                                <th class="border px-4 py-2 text-center">Nickname</th>
+                                <th class="border px-4 py-2 text-center">Content</th>
                                 <th class="border px-4 py-2 text-center">Page ID</th>
                                 <th class="border px-4 py-2 text-center">Parent ID</th>
                                 <th class="border px-4 py-2 text-center">created at</th>
@@ -55,6 +56,7 @@
                         <tbody>
                             <tr v-for="comment in logAndListCommentsList" :key="comment.id" class="hover:bg-gray-50">
                                 <td class="border px-4 py-2 text-center">{{ comment.id }}</td>
+                                <td class="border px-4 py-2 text-center">{{ comment.user_id }}</td>
                                 <td class="border px-4 py-2 text-center">{{ comment.nickname }}</td>
                                 <td class="border px-4 py-2 text-center">{{ comment.content }}</td>
                                 <td class="border px-4 py-2 text-center">{{ comment.page_id }}</td>

@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
 
-            // 로그인 사용자 (nullable 허용 X)
-            $table->foreignId('user_id')->nullable();
+            // user_id (외래키)
+            // 익명 사용자는 null
+            // 익명 사용자는 user_id가 null이므로, 외래키 제약조건을 nullable로 설정
+            $table->foreignUuid('user_id')->nullable();
 
             // 익명 사용자용
             $table->string('nickname')->nullable();
@@ -33,8 +35,8 @@ return new class extends Migration
                   ->constrained('comments');
 
             // 소프트 삭제 및 타임스탬프
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
 
     }
