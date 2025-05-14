@@ -134,7 +134,6 @@ class GoogleAnalyticsService implements GoogleAnalyticsServiceInterface
                         new Metric(['name' => 'active7DayUsers']),
                         new Metric(['name' => 'active28DayUsers']),
                         new Metric(['name' => 'activeUsers']),
-                        new Metric(['name' => 'averageSessionDuration']),
                         new Metric(['name' => 'newUsers']),
                         new Metric(['name' => 'screenPageViews']),
                         new Metric(['name' => 'scrolledUsers']),
@@ -181,11 +180,11 @@ class GoogleAnalyticsService implements GoogleAnalyticsServiceInterface
             }
 
             // 조회수 0인 데이터 제외
-            if ((int) $row->getMetricValues()[6]->getValue() === 0) {
+            if ((int) $row->getMetricValues()[5]->getValue() === 0) {
                 continue; 
             }
         
-            $screenPageViews = (int) $row->getMetricValues()[6]->getValue();
+            $screenPageViews = (int) $row->getMetricValues()[5]->getValue();
         
             $data = [
                 'fullPageUrl' => $fullPageUrl,
@@ -193,10 +192,9 @@ class GoogleAnalyticsService implements GoogleAnalyticsServiceInterface
                 'active7DayUsers' => $row->getMetricValues()[1]->getValue(),
                 'active28DayUsers' => $row->getMetricValues()[2]->getValue(),
                 'activeUsers' => $row->getMetricValues()[3]->getValue(),
-                'averageSessionDuration' => $row->getMetricValues()[4]->getValue(),
-                'newUsers' => $row->getMetricValues()[5]->getValue(),
+                'newUsers' => $row->getMetricValues()[4]->getValue(),
                 'screenPageViews' => $screenPageViews,
-                'scrolledUsers' => $row->getMetricValues()[7]->getValue(),
+                'scrolledUsers' => $row->getMetricValues()[6]->getValue(),
             ];
         
             // dimensions 집계
@@ -205,14 +203,13 @@ class GoogleAnalyticsService implements GoogleAnalyticsServiceInterface
         
             // metrics 집계
             $this->metricsData[$key][$formattedDate] = [
-                'active1DayUsers' => ($this->metricsData[$key][$formattedDate]['active1DayUsers'] ?? 0),
-                'active7DayUsers' => ($this->metricsData[$key][$formattedDate]['active7DayUsers'] ?? 0),
-                'active28DayUsers' => ($this->metricsData[$key][$formattedDate]['active28DayUsers'] ?? 0),
-                'activeUsers' => ($this->metricsData[$key][$formattedDate]['activeUsers'] ?? 0),
-                'averageSessionDuration' => ($this->metricsData[$key][$formattedDate]['averageSessionDuration'] ?? 0),
-                'newUsers' => ($this->metricsData[$key][$formattedDate]['newUsers'] ?? 0) + $data['newUsers'],
-                'screenPageViews' => ($this->metricsData[$key][$formattedDate]['screenPageViews'] ?? 0) + $data['screenPageViews'],
-                'scrolledUsers' => ($this->metricsData[$key][$formattedDate]['scrolledUsers'] ?? 0) + $data['scrolledUsers'],
+                'active1DayUsers' =>  $data['active1DayUsers'],
+                'active7DayUsers' =>  $data['active7DayUsers'],
+                'active28DayUsers' =>  $data['active28DayUsers'],
+                'activeUsers' =>  $data['activeUsers'],
+                'newUsers' =>  $data['newUsers'],
+                'screenPageViews' => $data['screenPageViews'],
+                'scrolledUsers' =>  $data['scrolledUsers'],
             ];
         
             Log::info('dimensionsData: ' . count($this->dimensionsData));
