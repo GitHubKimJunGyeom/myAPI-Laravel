@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-            <h2 class="text-xl font-semibold tracking-tight">This is the current status of Log&List's latest comment list</h2>
+            <h2 class="text-xl font-semibold tracking-tight">This is the current status of Log&List latest comment list</h2>
             <div class="grid auto-rows-min gap-4 grid-cols-1">
                 <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
                     <table class="min-w-full table-auto border border-gray-300 text-sm">
