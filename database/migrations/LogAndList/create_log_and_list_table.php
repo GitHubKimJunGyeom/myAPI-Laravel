@@ -110,7 +110,7 @@ return new class extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('notice', function (Blueprint $table) {
+        Schema::create('path_note', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('content');
