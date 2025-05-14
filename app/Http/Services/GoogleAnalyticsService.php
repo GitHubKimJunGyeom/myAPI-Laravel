@@ -69,7 +69,16 @@ class GoogleAnalyticsService implements GoogleAnalyticsServiceInterface
             'log_and_list' => config("googleanalytics.log_and_list_property_id"),
         ];
 
-        $this->getAnalyticsData($this->propertyList);
+        $this->dimensionsData = Cache::get('ga_dimensions_data', []);
+        $this->metricsData = Cache::get('ga_metrics_data', []);
+
+        // 캐시 없으면 API 호출
+        if (empty($this->dimensionsData) || empty($this->metricsData)) {
+            log::info('캐시 없음, API 호출');
+            $this->getAnalyticsData($this->propertyList);
+        } else {
+            log::info('캐시 있음, API 호출 안함');
+        }
     }
 
     //kjk-portfolio(Dimensions)
@@ -155,6 +164,10 @@ class GoogleAnalyticsService implements GoogleAnalyticsServiceInterface
                 throw new \Exception( "Error Processing Request: " . $e->getMessage(), $e->getCode(), $e);
             }
         }
+
+        Cache::put('ga_dimensions_data', $this->dimensionsData, now()->addHours(24));
+        Cache::put('ga_metrics_data', $this->metricsData, now()->addHours(24));
+        Log::info('getAnalyticsData: 캐시 저장 완료');
     }
     
     /**
@@ -165,9 +178,6 @@ class GoogleAnalyticsService implements GoogleAnalyticsServiceInterface
      */
     private function storeAnalyticsData(string $key, RepeatedField $rows): void
     {
-        Log::info('storeAnalyticsData');
-        Log::info('RepeatedField $rows: ' . $rows->count());
-
         foreach ($rows as $row) {
             $date = $row->getDimensionValues()[0]->getValue();  // YYYYMMDD
             $formattedDate = substr($date, 4, 2) . '-' . substr($date, 6, 2);  // MM-DD
@@ -211,9 +221,6 @@ class GoogleAnalyticsService implements GoogleAnalyticsServiceInterface
                 'screenPageViews' => $data['screenPageViews'],
                 'scrolledUsers' =>  $data['scrolledUsers'],
             ];
-        
-            Log::info('dimensionsData: ' . count($this->dimensionsData));
-            Log::info('metricsData: ' . count($this->metricsData));
         }
     }
 }
