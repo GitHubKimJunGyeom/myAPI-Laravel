@@ -18,7 +18,8 @@ import { Head } from '@inertiajs/vue3';
             <div class="flex flex-col items-center justify-center gap-4 text-center">
                 <h1 class="text-3xl font-bold">Welcome to myAPI</h1>
                 <p class="text-sm text-[#19140080] dark:text-[#EDEDEC80]">
-                    This is a simple API built with Laravel and Inertia.js.
+                    This is a simple API built with Laravel and Inertia.js.<br />
+                    You can check detailed information by clicking on the image.
                 </p>
             </div>
         </main>
