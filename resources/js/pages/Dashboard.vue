@@ -12,8 +12,8 @@
         }
     ];
     const props = defineProps<{
-        analyticsData: Record<string, number>
-        logAndListCommentsList: Comments[]
+        analyticsData: Record<string, number>[];
+        logAndListCommentsList: Comments[];
         }>();
 </script>
 
