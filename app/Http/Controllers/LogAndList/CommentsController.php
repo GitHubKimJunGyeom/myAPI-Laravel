@@ -1,41 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Page;
+namespace App\Http\Controllers\LogAndList;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
-use Illuminate\Support\Facades\Log;
-use App\Contracts\Services\KJKPortfolioServiceInterface;
 
-class KJKPortfolioController extends Controller
+class CommentsController extends Controller
 {
-
-    /**
-     * The KJK-Portfolio service instance.
-     *
-     * @var \App\Contracts\Services\KJKPortfolioServiceInterface
-     */
-    protected $kJKPortfolioServiceInterface;
-
-    /**
-     * Create a new class instance.
-     *
-     * @param \App\Contracts\Services\KJKPortfolioServiceInterface $kJKPortfolioServiceInterface
-     */
-    public function __construct(KJKPortfolioServiceInterface $kJKPortfolioServiceInterface)
-    {
-        $this->kJKPortfolioServiceInterface = $kJKPortfolioServiceInterface;
-    }
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $metricsData = $this->kJKPortfolioServiceInterface->getMetricsData();
-        Log::info('KJK-Portfolio metricsData', $metricsData);
-        return Inertia::render('KJKPortfolio', $metricsData);
+        //
     }
 
     /**

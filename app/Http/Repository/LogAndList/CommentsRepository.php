@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Repository;
-use App\Models\Comments;
-use App\Contracts\Repository\LogAndListCommentsRepositoryInterface;
+namespace App\Http\Repository\LogAndList;
+use App\Models\LogAndList\Comments;
+use App\Contracts\Repository\LogAndList\CommentsRepositoryInterface as LogAndListCommentsRepositoryInterface;
 use Illuminate\Support\Facades\Log;
 
-class LogAndListCommentsRepository implements LogAndListCommentsRepositoryInterface
+class CommentsRepository implements LogAndListCommentsRepositoryInterface
 {
     /**
      * The comments model instance.
      *
-     * @var \App\Models\Comments
+     * @var \App\Models\LogAndList\Comments
      */
     protected $comments;
 
@@ -54,7 +54,7 @@ class LogAndListCommentsRepository implements LogAndListCommentsRepositoryInterf
      * Get a comment by ID.
      *
      * @param  int  $id
-     * @return \App\Models\Comments
+     * @return \App\Models\LogAndList\Comments
      */
     public function show($id)
     {
@@ -66,7 +66,7 @@ class LogAndListCommentsRepository implements LogAndListCommentsRepositoryInterf
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \App\Models\Comments
+     * @return \App\Models\LogAndList\Comments
      */
     public function update($request, $id)
     {

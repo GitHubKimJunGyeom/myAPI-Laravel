@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Services;
+namespace App\Http\Services\DashBoard;
 
-use App\Contracts\Services\DashboardServiceInterface;
-use App\Contracts\Services\GoogleAnalyticsServiceInterface;
+use App\Contracts\Services\DashBoard\DimensionsDataServiceInterface as DashBoardDimensionsDataServiceInterface;
+use App\Contracts\Services\Google\AnalyticsServiceInterface as GoogleAnalyticsServiceInterface;
 use Illuminate\Support\Facades\Log;
 
-class DashboardService implements DashboardServiceInterface
+class DimensionsDataService implements DashBoardDimensionsDataServiceInterface
 {
     /**
      * The Google Analytics service instance.
@@ -23,7 +23,7 @@ class DashboardService implements DashboardServiceInterface
     }
 
     /**
-     * Get the dashboard data.
+     * Get the dashboard-dimensions-data data.
      *
      * @return array
      */

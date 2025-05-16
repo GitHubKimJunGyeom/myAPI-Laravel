@@ -1,35 +1,41 @@
 <?php
 
-namespace App\Http\Controllers\Page;
+namespace App\Http\Controllers\KJKPortfolio;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Log;
-use App\Contracts\Services\LogAndListServiceInterface;
+use App\Contracts\Services\KJKPortfolio\MetricsDataServiceInterface as KJKPortfolioMetricsDataServiceInterface;
 
-class LogAndListController extends Controller
+class DimensionsDataController extends Controller
 {
-    /**
-     * The Log&List service instance.
-     *
-     * @var \App\Contracts\Services\LogAndListServiceInterface
-     */
-    protected $logAndListServiceInterface;
 
-    public function __construct(LogAndListServiceInterface $logAndListServiceInterface)
+    /**
+     * The KJK-Portfolio service instance.
+     *
+     * @var \App\Contracts\Services\KJKPortfolioMetricsDataServiceInterface
+     */
+    protected $kJKPortfolioMetricsDataServiceInterface;
+
+    /**
+     * Create a new class instance.
+     *
+     * @param \App\Contracts\Services\KJKPortfolioMetricsDataServiceInterface $kJKPortfolioMetricsDataServiceInterface
+     */
+    public function __construct(KJKPortfolioMetricsDataServiceInterface $kJKPortfolioMetricsDataServiceInterface)
     {
-        $this->logAndListServiceInterface = $logAndListServiceInterface;
+        $this->kJKPortfolioMetricsDataServiceInterface = $kJKPortfolioMetricsDataServiceInterface;
     }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-        $metricsData = $this->logAndListServiceInterface->getMetricsData();
-        Log::info('Log&List metricsData', $metricsData);
-        return Inertia::render('LogAndList', $metricsData);
+        $metricsData = $this->kJKPortfolioMetricsDataServiceInterface->getMetricsData();
+        Log::info('KJK-Portfolio metricsData', $metricsData);
+        return Inertia::render('KJKPortfolio', $metricsData);
     }
 
     /**

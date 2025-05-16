@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Contracts\Repository;
+namespace App\Contracts\Repository\LogAndList;
 
-interface LogAndListCommentsRepositoryInterface
+interface CommentsRepositoryInterface
 {
     public function index();
     public function store($request);

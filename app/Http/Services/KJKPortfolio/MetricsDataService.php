@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Services;
+namespace App\Http\Services\KJKPortfolio;
 
-use App\Contracts\Services\KJKPortfolioServiceInterface;
-use App\Contracts\Services\GoogleAnalyticsServiceInterface;
+use App\Contracts\Services\KJKPortfolio\MetricsDataServiceInterface as KJKPortfolioMetricsDataServiceInterface;
+use App\Contracts\Services\Google\AnalyticsServiceInterface as GoogleAnalyticsServiceInterface;
+
 use Illuminate\Support\Facades\Log;
 
-class KJKPortfolioService implements KJKPortfolioServiceInterface
+class MetricsDataService implements KJKPortfolioMetricsDataServiceInterface
 {
     /**
      * The Google Analytics service instance.

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Contracts\Services;
+namespace App\Contracts\Services\Google;
 
-interface GoogleAnalyticsServiceInterface
+interface AnalyticsServiceInterface
 {
     //kjk-portfolio(Dimensions)
     public function getKjkPortfolioDimensionsData(): array;

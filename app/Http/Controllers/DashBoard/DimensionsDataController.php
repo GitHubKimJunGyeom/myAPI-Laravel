@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\page;
+namespace App\Http\Controllers\DashBoard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Contracts\Services\DashboardServiceInterface;
-use App\Contracts\Services\LogAndListCommentsServiceInterface;
+use App\Contracts\Services\DashBoard\DimensionsDataServiceInterface as DashBoardDimensionsDataServiceInterface;
+use App\Contracts\Services\LogAndList\CommentsServiceInterface as LogAndListCommentsServiceInterface;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Log;
 
-class DashboardController extends Controller
+class DimensionsDataController extends Controller
 {
     /**
-     * The dashboard service implementation.
+     * The dashboard-dimensions-data service implementation.
      *
-     * @var DashboardServiceInterface
+     * @var DashBoardDimensionsDataServiceInterface
      */
-    protected $dashboardServiceInterface;
+    protected $dashBoardDimensionsServiceInterface;
 
     /**
      * The log and list comments service implementation.
@@ -28,10 +28,10 @@ class DashboardController extends Controller
     /**
      * Create a new class instance.
      */
-    public function __construct(DashboardServiceInterface $dashboardServiceInterface,
+    public function __construct(DashBoardDimensionsDataServiceInterface $dashBoardDimensionsServiceInterface,
                                 LogAndListCommentsServiceInterface $logAndListCommentsServiceInterface)
     {
-        $this->dashboardServiceInterface = $dashboardServiceInterface;
+        $this->dashBoardDimensionsServiceInterface = $dashBoardDimensionsServiceInterface;
         $this->logAndListCommentsServiceInterface = $logAndListCommentsServiceInterface;
     }
 
@@ -40,7 +40,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $analyticsData = $this->dashboardServiceInterface->getDimensionsData();
+        $analyticsData = $this->dashBoardDimensionsServiceInterface->getDimensionsData();
         $logAndListCommentsList = $this->logAndListCommentsServiceInterface->index();
         
         Log::info('Dashboard data', $analyticsData);

@@ -18,17 +18,17 @@ import AppLogo from './AppLogo.vue';
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
-        href: '/dashboard',
+        href: '/dashboard-dimensions-data',
         icon: LayoutGrid,
     },
     {
         title: 'KJK-Portfolio',
-        href: '/kjkportfolio',
+        href: '/kjkportfolio-metrics-data',
         icon: FileUser,
     },
     {
         title: 'Log&List',
-        href: '/logandlist',
+        href: '/logandlist-metrics-data',
         icon: NotebookTabs
     },
     
@@ -37,12 +37,12 @@ const mainNavItems: NavItem[] = [
 const footerNavItems: NavItem[] = [
     {   
         title: 'KJK-Portfolio',
-        href: 'https://github.com/GitHubKimJunGyeom',
+        href: 'https://kjk-portfolio.vercel.app',
         icon: FileUser,
     },  
     {   
         title: 'Log&List',
-        href: 'https://github.com/GitHubKimJunGyeom',
+        href: 'https://log-and-list.vercel.app',
         icon: NotebookTabs,
     },  
     {
@@ -75,7 +75,7 @@ const footerNavItems: NavItem[] = [
             <SidebarMenu>
                 <SidebarMenuItem>
                     <SidebarMenuButton size="lg" as-child>
-                        <Link :href="route('dashboard.index')">
+                        <Link :href="route('dashboard-dimensions-data.index')">
                             <AppLogo />
                         </Link>
                     </SidebarMenuButton>

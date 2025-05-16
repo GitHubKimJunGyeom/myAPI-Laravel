@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use App\Contracts\Services\GoogleAnalyticsServiceInterface;
+use App\Contracts\Services\Google\AnalyticsServiceInterface as GoogleAnalyticsServiceInterface;
 use Illuminate\Support\ServiceProvider;
-use App\Http\Services\GoogleAnalyticsService;
+use App\Http\Services\Google\AnalyticsService as GoogleAnalyticsService;
 class ApiServiceProvider extends ServiceProvider
 {
     /**

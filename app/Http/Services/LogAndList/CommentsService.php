@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Services;
-use App\Contracts\Services\LogAndListCommentsServiceInterface;
-use App\Contracts\Repository\LogAndListCommentsRepositoryInterface;
+namespace App\Http\Services\LogAndList;
+use App\Contracts\Services\LogAndList\CommentsServiceInterface as LogAndListCommentsServiceInterface;
+use App\Contracts\Repository\LogAndList\CommentsRepositoryInterface as LogAndListCommentsRepositoryInterface;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 
-class LogAndListCommentsService implements LogAndListCommentsServiceInterface
+class CommentsService implements LogAndListCommentsServiceInterface
 {
     /**
      * @var LogAndListCommentsRepositoryInterface
@@ -63,7 +63,7 @@ class LogAndListCommentsService implements LogAndListCommentsServiceInterface
      * Get a comment by ID.
      *
      * @param  int  $id
-     * @return \App\Models\Comments
+     * @return \App\Models\LogAndList\Comments
      */
     public function show($id)
     {
@@ -75,7 +75,7 @@ class LogAndListCommentsService implements LogAndListCommentsServiceInterface
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \App\Models\Comments
+     * @return \App\Models\LogAndList\Comments
      */
     public function update($request, $id)
     {

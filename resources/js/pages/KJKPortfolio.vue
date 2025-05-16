@@ -7,7 +7,7 @@
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: pageTitle,
-            href: '/kjkportfolio',
+            href: '/kjkportfolio-metrics-data',
         }
     ];
     const project = defineProps<{

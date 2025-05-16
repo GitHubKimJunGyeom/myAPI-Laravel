@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Contracts\Services;
+namespace App\Contracts\Services\LogAndList;
 
-interface LogAndListCommentsServiceInterface
+interface CommentsServiceInterface
 {
     public function index();
     public function store($request);

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Services;
+namespace App\Http\Services\Google;
 
-use App\Contracts\Services\GoogleAnalyticsServiceInterface;
+use App\Contracts\Services\Google\AnalyticsServiceInterface as GoogleAnalyticsServiceInterface;
 use Google\Analytics\Data\V1beta\Client\BetaAnalyticsDataClient;
 use Google\Analytics\Data\V1beta\DateRange;
 use Google\Analytics\Data\V1beta\Dimension;
@@ -13,7 +13,7 @@ use Google\Analytics\Data\V1beta\OrderBy\DimensionOrderBy;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cache;
 use Google\Protobuf\Internal\RepeatedField;
-class GoogleAnalyticsService implements GoogleAnalyticsServiceInterface
+class AnalyticsService implements GoogleAnalyticsServiceInterface
 {
     /**
      * @var BetaAnalyticsDataClient

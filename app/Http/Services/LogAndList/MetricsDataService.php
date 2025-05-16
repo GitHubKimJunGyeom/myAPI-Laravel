@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Services;
+namespace App\Http\Services\LogAndList;
 
-use App\Contracts\Services\LogAndListServiceInterface;
-use App\Contracts\Services\GoogleAnalyticsServiceInterface;
+use App\Contracts\Services\LogAndList\MetricsDataServiceInterface as LogAndListMetricsDataServiceInterface;
+use App\Contracts\Services\Google\AnalyticsServiceInterface as GoogleAnalyticsServiceInterface;
 use Illuminate\Support\Facades\Log;
 
-class LogAndListService implements LogAndListServiceInterface
+class MetricsDataService implements LogAndListMetricsDataServiceInterface
 {
     /**
      * The Google Analytics service instance.

@@ -1,14 +1,14 @@
 <script setup lang="ts">
     import AppLayout from '@/layouts/AppLayout.vue';
     import { type BreadcrumbItem } from '@/types';
-    import { type Comments } from '@/types/logandlist';
+    import { type Comments } from '@/types/logandlist-metrics-data';
     import { Head } from '@inertiajs/vue3';
     import GoogleAnalyticsDimensionsChart from '@/components/googleanalytics/DimensionsChart.vue';
     const pageTitle = 'Dashboard';
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: pageTitle,
-            href: '/dashboard',
+            href: '/dashboard-dimensions-data',
         }
     ];
     const props = defineProps<{
