@@ -9,6 +9,8 @@ class Comments extends Model
 {
     use SoftDeletes;
 
+    protected $connection = 'logandlist';
+
     protected $fillable = [
         'user_id',
         'nickname',
