@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import AppLayout from '@/layouts/AppLayout.vue';
     import { type BreadcrumbItem } from '@/types';
-    import { type Comments } from '@/types/logandlist-metrics-data';
+    import { type Comments } from '@/types/logandlist';
     import { Head } from '@inertiajs/vue3';
     import GoogleAnalyticsDimensionsChart from '@/components/googleanalytics/DimensionsChart.vue';
     const pageTitle = 'Dashboard';
@@ -12,7 +12,7 @@
         }
     ];
     const props = defineProps<{
-        analyticsData: Record<string, number>[];
+        analyticsData: object;
         logAndListCommentsList: Comments[];
         }>();
 </script>

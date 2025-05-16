@@ -17,7 +17,7 @@ ChartJS.register(Title, Tooltip, Legend, BarElement,LineElement, CategoryScale, 
 
 const props = defineProps<{
   chartData: Record<string, number>
-  projectName: any
+  projectName: string
 }>();
 
 const nameChange = (projectName: string) => {
