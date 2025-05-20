@@ -6,7 +6,6 @@ import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-    base: '/',
     plugins: [
         laravel({
             input: ['resources/js/app.ts'],
