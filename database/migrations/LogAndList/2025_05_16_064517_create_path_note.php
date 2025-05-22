@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('path_note', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('content');
+            $table->text('content_ko');
+            $table->text('content_ja');
             $table->timestamps();
             $table->softDeletes();
         });
