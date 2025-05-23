@@ -3,8 +3,8 @@
 namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 
-//interfaces(Repository)
-use App\Contracts\Repository\LogAndList\CommentsRepositoryInterface as LogAndListCommentsRepositoryInterface;
+//interfaces(Repositories)
+use App\Contracts\Repositories\LogAndList\CommentsRepositoryInterface as LogAndListCommentsRepositoryInterface;
 
 //interfaces(Service)
 use App\Contracts\Services\DashBoard\DimensionsDataServiceInterface as DashBoardDimensionsDataServiceInterface;
@@ -18,8 +18,8 @@ use App\Http\Services\KJKPortfolio\MetricsDataService as KJKPortfolioMetricsData
 use App\Http\Services\LogAndList\MetricsDataService as LogAndListMetricsDataService;
 use App\Http\Services\LogAndList\CommentsService as LogAndListCommentsService;
 
-//Repository
-use App\Http\Repository\LogAndList\CommentsRepository as LogAndListCommentsRepository;
+//Repositories
+use App\Http\Repositories\LogAndList\CommentsRepository as LogAndListCommentsRepository;
 
 class PlatformServiceProvider extends ServiceProvider
 {

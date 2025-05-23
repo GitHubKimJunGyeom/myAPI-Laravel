@@ -29,7 +29,7 @@ class DimensionsDataController extends Controller
         //
         $metricsData = $this->logAndListMetricsDataServiceInterface->getMetricsData();
         Log::info('Log&List metricsData', $metricsData);
-        return Inertia::render('LogAndList', $metricsData);
+        return Inertia::render('LogAndList/index', $metricsData);
     }
 
     /**

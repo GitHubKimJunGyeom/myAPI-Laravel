@@ -2,7 +2,7 @@
 
 namespace App\Http\Services\LogAndList;
 use App\Contracts\Services\LogAndList\CommentsServiceInterface as LogAndListCommentsServiceInterface;
-use App\Contracts\Repository\LogAndList\CommentsRepositoryInterface as LogAndListCommentsRepositoryInterface;
+use App\Contracts\Repositories\LogAndList\CommentsRepositoryInterface as LogAndListCommentsRepositoryInterface;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 

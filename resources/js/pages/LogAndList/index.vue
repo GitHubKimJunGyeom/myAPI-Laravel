@@ -7,7 +7,7 @@
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: pageTitle,
-            href: '/logandlist-metrics-data',
+            href: '/logandlist/metrics-data',
         }
     ];
     const project = defineProps<{

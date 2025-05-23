@@ -13,7 +13,7 @@ import { Head } from '@inertiajs/vue3';
                 src="@/public/assets/img/png/MyApiAguimanChan.png" 
                 alt="myAPI"
                 class="cursor-pointer max-w-[300px] object-contain"
-                @click="$inertia.visit(route('dashboard-dimensions-data.index'))"
+                @click="$inertia.visit(route('dashboard.dimensions-data.index'))"
             />
             <div class="flex flex-col items-center justify-center gap-4 text-center">
                 <h1 class="text-3xl font-bold">Welcome to myAPI</h1>

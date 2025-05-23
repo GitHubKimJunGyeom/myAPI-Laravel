@@ -35,7 +35,7 @@ class DimensionsDataController extends Controller
     {
         $metricsData = $this->kJKPortfolioMetricsDataServiceInterface->getMetricsData();
         Log::info('KJK-Portfolio metricsData', $metricsData);
-        return Inertia::render('KJKPortfolio', $metricsData);
+        return Inertia::render('KJKPortfolio/index', $metricsData);
     }
 
     /**

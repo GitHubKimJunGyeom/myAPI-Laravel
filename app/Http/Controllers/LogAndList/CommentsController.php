@@ -4,15 +4,41 @@ namespace App\Http\Controllers\LogAndList;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use App\Contracts\Services\LogAndList\CommentsServiceInterface as LogAndListCommentsServiceInterface;
+use Illuminate\Support\Facades\Log;
 
 class CommentsController extends Controller
 {
+
+    /**
+     * The log and list comments service implementation.
+     *
+     * @var LogAndListCommentsServiceInterface
+     */
+    protected $logAndListCommentsServiceInterface;
+
+     /**
+     * Create a new class instance.
+     */
+    public function __construct(LogAndListCommentsServiceInterface $logAndListCommentsServiceInterface)
+    {
+        $this->logAndListCommentsServiceInterface = $logAndListCommentsServiceInterface;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         //
+        $logAndListCommentsList = $this->logAndListCommentsServiceInterface->index();
+        Log::info('Log&List Comments data', $logAndListCommentsList);
+
+        $viewData = [
+            'logAndListCommentsList' => $logAndListCommentsList,
+        ];
+        return Inertia::render('LogAndList/Comments/index', $viewData);
     }
 
     /**

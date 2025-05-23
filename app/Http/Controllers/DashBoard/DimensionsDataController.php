@@ -5,7 +5,6 @@ namespace App\Http\Controllers\DashBoard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Contracts\Services\DashBoard\DimensionsDataServiceInterface as DashBoardDimensionsDataServiceInterface;
-use App\Contracts\Services\LogAndList\CommentsServiceInterface as LogAndListCommentsServiceInterface;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Log;
 
@@ -18,21 +17,14 @@ class DimensionsDataController extends Controller
      */
     protected $dashBoardDimensionsServiceInterface;
 
-    /**
-     * The log and list comments service implementation.
-     *
-     * @var LogAndListCommentsServiceInterface
-     */
-    protected $logAndListCommentsServiceInterface;
+
 
     /**
      * Create a new class instance.
      */
-    public function __construct(DashBoardDimensionsDataServiceInterface $dashBoardDimensionsServiceInterface,
-                                LogAndListCommentsServiceInterface $logAndListCommentsServiceInterface)
+    public function __construct(DashBoardDimensionsDataServiceInterface $dashBoardDimensionsServiceInterface)
     {
         $this->dashBoardDimensionsServiceInterface = $dashBoardDimensionsServiceInterface;
-        $this->logAndListCommentsServiceInterface = $logAndListCommentsServiceInterface;
     }
 
     /**
@@ -41,16 +33,13 @@ class DimensionsDataController extends Controller
     public function index()
     {
         $analyticsData = $this->dashBoardDimensionsServiceInterface->getDimensionsData();
-        $logAndListCommentsList = $this->logAndListCommentsServiceInterface->index();
         
         Log::info('Dashboard data', $analyticsData);
-        Log::info('Log&List Comments data', $logAndListCommentsList);
 
         $viewData = [
-            'analyticsData' => $analyticsData,
-            'logAndListCommentsList' => $logAndListCommentsList,
+            'analyticsData' => $analyticsData
         ];
-        return Inertia::render('Dashboard', $viewData);
+        return Inertia::render('DashBoard/index', $viewData);
     }
 
     /**

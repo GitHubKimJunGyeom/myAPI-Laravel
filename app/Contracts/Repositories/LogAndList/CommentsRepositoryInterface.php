@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Contracts\Repository\LogAndList;
+namespace App\Contracts\Repositories\LogAndList;
 
 interface CommentsRepositoryInterface
 {

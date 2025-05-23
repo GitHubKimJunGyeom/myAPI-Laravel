@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
+import NavLogAndList from '@/components/NavLogAndList.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
@@ -18,20 +19,19 @@ import AppLogo from './AppLogo.vue';
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
-        href: '/dashboard-dimensions-data',
+        href: '/dashboard/dimensions-data',
         icon: LayoutGrid,
     },
     {
         title: 'KJK-Portfolio',
-        href: '/kjkportfolio-metrics-data',
+        href: '/kjkportfolio/metrics-data',
         icon: FileUser,
     },
     {
         title: 'Log&List',
-        href: '/logandlist-metrics-data',
+        href: '/logandlist/metrics-data',
         icon: NotebookTabs
-    },
-    
+    }
 ];
 
 const footerNavItems: NavItem[] = [
@@ -75,7 +75,7 @@ const footerNavItems: NavItem[] = [
             <SidebarMenu>
                 <SidebarMenuItem>
                     <SidebarMenuButton size="lg" as-child>
-                        <Link :href="route('dashboard-dimensions-data.index')">
+                        <Link :href="route('dashboard.dimensions-data.index')">
                             <AppLogo />
                         </Link>
                     </SidebarMenuButton>
@@ -85,11 +85,11 @@ const footerNavItems: NavItem[] = [
 
         <SidebarContent>
             <NavMain :items="mainNavItems" />
+            <NavLogAndList />
         </SidebarContent>
 
         <SidebarFooter>
             <NavFooter :items="footerNavItems" />
-            <!-- <NavUser /> -->
         </SidebarFooter>
     </Sidebar>
     <slot />
