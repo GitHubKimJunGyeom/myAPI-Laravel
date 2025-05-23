@@ -8,7 +8,7 @@ import { ScrollText, MessageCircleMore } from 'lucide-vue-next';
 <template>
     <DropdownMenuGroup>
         <DropdownMenuItem :as-child="true">
-            <Link class="block w-full" :href="route('profile.edit')" as="button">
+            <Link class="block w-full" :href="route('logandlist.path-notes-data.index')" as="button">
                 <ScrollText class="mr-2 h-4 w-4" />
                 PathNote
             </Link>

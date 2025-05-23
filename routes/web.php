@@ -5,15 +5,20 @@ require __DIR__.'/auth.php';
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
+// dashboard
 use App\Http\Controllers\DashBoard\DimensionsDataController as DashBoardDimensionsDataController;
+
+// kjkportfolio
 use App\Http\Controllers\KJKPortfolio\DimensionsDataController as KJKPortfolioMetricsDataController;
+
+// logandlist
 use App\Http\Controllers\LogAndList\DimensionsDataController as LogAndListDimensionsDataController;
 use App\Http\Controllers\LogAndList\CommentsController as LogAndListCommentsController;
-
+use App\Http\Controllers\LogAndList\PathNotesController as LogAndListPathNotesController;
 
 // welcome page
 Route::get('/', function () {return Inertia::render('Welcome');})->name('home');
-
 
 /**
  * dashboard
@@ -35,6 +40,7 @@ Route::group(['prefix' => 'kjkportfolio', 'as' => 'kjkportfolio.'], function () 
 Route::group(['prefix' => 'logandlist', 'as' => 'logandlist.'], function () {
     Route::resource('metrics-data', LogAndListDimensionsDataController::class)->only('index');
     Route::resource('comments-data', LogAndListCommentsController::class)->only('index');
+    Route::resource('path-notes-data', LogAndListPathNotesController::class)->only('index');
 });
 
 

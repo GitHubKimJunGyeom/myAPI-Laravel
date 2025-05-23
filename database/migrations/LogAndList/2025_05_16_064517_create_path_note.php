@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('path_note', function (Blueprint $table) {
+        Schema::create('path_notes', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('content_ko');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('path_note');
+        Schema::dropIfExists('path_notes');
     }
 };

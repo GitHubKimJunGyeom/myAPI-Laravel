@@ -2,13 +2,9 @@
 import LogAndLostInfo from '@/components/LogAndLostInfo.vue';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
-import { type SharedData, type User } from '@/types';
-import { usePage } from '@inertiajs/vue3';
 import { ChevronDown } from 'lucide-vue-next';
 import LogAndListMenuContent from './LogAndListMenuContent.vue';
 
-const page = usePage<SharedData>();
-const user = page.props.auth.user as User;
 const { isMobile, state } = useSidebar();
 </script>
 

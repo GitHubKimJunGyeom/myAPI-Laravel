@@ -5,21 +5,25 @@ use Illuminate\Support\ServiceProvider;
 
 //interfaces(Repositories)
 use App\Contracts\Repositories\LogAndList\CommentsRepositoryInterface as LogAndListCommentsRepositoryInterface;
+use App\Contracts\Repositories\LogAndList\PathNotesRepositoryInterface as LogAndListPathNotesRepositoryInterface;
 
 //interfaces(Service)
 use App\Contracts\Services\DashBoard\DimensionsDataServiceInterface as DashBoardDimensionsDataServiceInterface;
 use App\Contracts\Services\KJKPortfolio\MetricsDataServiceInterface as KJKPortfolioMetricsDataServiceInterface;
 use App\Contracts\Services\LogAndList\MetricsDataServiceInterface as LogAndListMetricsDataServiceInterface;
 use App\Contracts\Services\LogAndList\CommentsServiceInterface as LogAndListCommentsServiceInterface;
+use App\Contracts\Services\LogAndList\PathNotesServiceInterface as LogAndListPathNotesServiceInterface;
 
 //Services
 use App\Http\Services\DashBoard\DimensionsDataService as DashBoardDimensionsDataService;
 use App\Http\Services\KJKPortfolio\MetricsDataService as KJKPortfolioMetricsDataService;
 use App\Http\Services\LogAndList\MetricsDataService as LogAndListMetricsDataService;
 use App\Http\Services\LogAndList\CommentsService as LogAndListCommentsService;
+use App\Http\Services\LogAndList\PathNotesService as LogAndListPathNotesService;
 
 //Repositories
 use App\Http\Repositories\LogAndList\CommentsRepository as LogAndListCommentsRepository;
+use App\Http\Repositories\LogAndList\PathNotesRepository as LogAndListPathNotesRepository;
 
 class PlatformServiceProvider extends ServiceProvider
 {
@@ -32,6 +36,7 @@ class PlatformServiceProvider extends ServiceProvider
         $this->app->singleton(KJKPortfolioMetricsDataServiceInterface::class, KJKPortfolioMetricsDataService::class);
         $this->app->singleton(LogAndListMetricsDataServiceInterface::class, LogAndListMetricsDataService::class);
         $this->app->singleton(LogAndListCommentsServiceInterface::class, LogAndListCommentsService::class);
+        $this->app->singleton(LogAndListPathNotesServiceInterface::class, LogAndListPathNotesService::class);
     }
 
     /**
@@ -40,5 +45,6 @@ class PlatformServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->app->bind(LogAndListCommentsRepositoryInterface::class, LogAndListCommentsRepository::class);
+        $this->app->bind(LogAndListPathNotesRepositoryInterface::class, LogAndListPathNotesRepository::class);
     }
 }
