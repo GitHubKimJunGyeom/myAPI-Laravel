@@ -48,7 +48,7 @@ class PathNotesController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('LogAndList/PathNotes/create');
     }
 
     /**
