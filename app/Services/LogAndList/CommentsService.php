@@ -21,7 +21,6 @@ class CommentsService implements LogAndListCommentsServiceInterface
         $this->logAndListCommentsRepositoryInterface = $logAndListCommentsRepositoryInterface;
     }
 
-
     /**
      * Get all comments.
      *

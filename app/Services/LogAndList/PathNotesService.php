@@ -34,7 +34,6 @@ class PathNotesService implements LogAndListPathNotesServiceInterface
      */
     public function index()
     {
-        // Fetch all path notes using the repository
         $pathNoteCollection = $this->logAndListPathNotesRepositoryInterface->index();
         $pathNotes = $pathNoteCollection->map(function ($pathNote) {
             return [
@@ -49,6 +48,7 @@ class PathNotesService implements LogAndListPathNotesServiceInterface
         Log::info('Log&List Path Note data', $pathNotes);
         return $pathNotes;
     }
+
     /**
      * Store a new path note.
      *
@@ -65,6 +65,7 @@ class PathNotesService implements LogAndListPathNotesServiceInterface
 
         return $pathNotes;
     }
+
     /**
      * Get a path note by ID.
      *
@@ -81,6 +82,7 @@ class PathNotesService implements LogAndListPathNotesServiceInterface
 
         return $pathNotes;
     }
+
     /**
      * Update a path note.
      *
@@ -98,6 +100,7 @@ class PathNotesService implements LogAndListPathNotesServiceInterface
 
         return $pathNotes;
     }
+    
     /**
      * Delete a path note.
      *

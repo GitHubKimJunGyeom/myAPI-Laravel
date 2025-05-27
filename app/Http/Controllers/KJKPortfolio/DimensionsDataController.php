@@ -10,7 +10,6 @@ use App\Contracts\Services\KJKPortfolio\MetricsDataServiceInterface as KJKPortfo
 
 class DimensionsDataController extends Controller
 {
-
     /**
      * The KJK-Portfolio service instance.
      *
@@ -36,53 +35,5 @@ class DimensionsDataController extends Controller
         $metricsData = $this->kJKPortfolioMetricsDataServiceInterface->getMetricsData();
         Log::info('KJK-Portfolio metricsData', $metricsData);
         return Inertia::render('KJKPortfolio/index', $metricsData);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

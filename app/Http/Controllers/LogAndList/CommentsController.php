@@ -31,10 +31,8 @@ class CommentsController extends Controller
      */
     public function index()
     {
-        //
         $logAndListCommentsList = $this->logAndListCommentsServiceInterface->index();
         Log::info('Log&List Comments data', $logAndListCommentsList);
-
         $viewData = [
             'logAndListCommentsList' => $logAndListCommentsList,
         ];

@@ -84,28 +84,28 @@ class AnalyticsService implements GoogleAnalyticsServiceInterface
     //kjk-portfolio(Dimensions)
     public function getKjkPortfolioDimensionsData(): array
     {
-        Log::info('getKjkPortfolioDimensionsData');
+        Log::info('Get KJK-Portfolio Dimensions Data');
         return $this->dimensionsData['kjk_portfolio'] ?? [];
     }
 
     // Log&List(Dimensions)
     public function getLogAndListDimensionsData(): array
     {
-        Log::info('getLogAndListDimensionsData');
+        Log::info('Get Log&List Dimensions Data');
         return $this->dimensionsData['log_and_list'] ?? [];
     }
 
     //kjk-portfolio(Metric)
     public function getKjkPortfolioMetricData(): array
     {
-        Log::info('getKjkPortfolioMetricData');
+        Log::info('Get KJK-Portfolio Metrics Data');
         return $this->metricsData['kjk_portfolio'] ?? [];
     }
 
     // Log&List(Metric)
     public function getLogAndListMetricsData(): array
     {
-        Log::info('getLogAndListMetricsData');
+        Log::info('Get Log&List Metrics Data');
         return $this->metricsData['log_and_list'] ?? [];
     }
     
@@ -117,8 +117,6 @@ class AnalyticsService implements GoogleAnalyticsServiceInterface
      */
     private function getAnalyticsData(array $propertyList): void
     {
-        Log::info('getAnalyticsData');
-
         $this->dimensionsData = [];
         $this->metricsData = [];
 
@@ -167,7 +165,7 @@ class AnalyticsService implements GoogleAnalyticsServiceInterface
 
         Cache::put('ga_dimensions_data', $this->dimensionsData, now()->addHours(24));
         Cache::put('ga_metrics_data', $this->metricsData, now()->addHours(24));
-        Log::info('getAnalyticsData: 캐시 저장 완료');
+        Log::info('Get Analytics Data: Complete save Cache');
     }
     
     /**
@@ -184,12 +182,12 @@ class AnalyticsService implements GoogleAnalyticsServiceInterface
             
             $fullPageUrl = $row->getDimensionValues()[1]->getValue();
             
-            // localhost 제외
+            // except localhost 
             if (str_contains($fullPageUrl, 'localhost')) {
                 continue;
             }
 
-            // 조회수 0인 데이터 제외
+            // except value 0
             if ((int) $row->getMetricValues()[5]->getValue() === 0) {
                 continue; 
             }
@@ -207,11 +205,11 @@ class AnalyticsService implements GoogleAnalyticsServiceInterface
                 'scrolledUsers' => $row->getMetricValues()[6]->getValue(),
             ];
         
-            // dimensions 집계
+            // dimensions
             $this->dimensionsData[$key][$formattedDate] = 
                 ($this->dimensionsData[$key][$formattedDate] ?? 0) + $screenPageViews;
         
-            // metrics 집계
+            // metrics
             $this->metricsData[$key][$formattedDate] = [
                 'active1DayUsers' =>  $data['active1DayUsers'],
                 'active7DayUsers' =>  $data['active7DayUsers'],
