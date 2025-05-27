@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services\KJKPortfolio;
+namespace App\Services\KJKPortfolio;
 
 use App\Contracts\Services\KJKPortfolio\MetricsDataServiceInterface as KJKPortfolioMetricsDataServiceInterface;
 use App\Contracts\Services\Google\AnalyticsServiceInterface as GoogleAnalyticsServiceInterface;

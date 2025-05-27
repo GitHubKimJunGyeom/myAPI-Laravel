@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services\LogAndList;
+namespace App\Services\LogAndList;
 
 use App\Contracts\Services\LogAndList\MetricsDataServiceInterface as LogAndListMetricsDataServiceInterface;
 use App\Contracts\Services\Google\AnalyticsServiceInterface as GoogleAnalyticsServiceInterface;

@@ -40,7 +40,9 @@ Route::group(['prefix' => 'kjkportfolio', 'as' => 'kjkportfolio.'], function () 
 Route::group(['prefix' => 'logandlist', 'as' => 'logandlist.'], function () {
     Route::resource('metrics-data', LogAndListDimensionsDataController::class)->only('index');
     Route::resource('comments-data', LogAndListCommentsController::class)->only('index');
-    Route::resource('path-notes-data', LogAndListPathNotesController::class)->only('index', 'create');
+    Route::resource('path-notes-data', LogAndListPathNotesController::class)
+        ->parameter('path-notes-data', 'id')
+        ->only('index', 'create', 'store', 'show' ,'edit', 'update', 'destroy');
 });
 
 

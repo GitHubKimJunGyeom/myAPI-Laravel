@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services\Google;
+namespace App\Services\Google;
 
 use App\Contracts\Services\Google\AnalyticsServiceInterface as GoogleAnalyticsServiceInterface;
 use Google\Analytics\Data\V1beta\Client\BetaAnalyticsDataClient;

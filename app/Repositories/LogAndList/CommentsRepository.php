@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Repositories\LogAndList;
+namespace App\Repositories\LogAndList;
 use App\Models\LogAndList\Comments;
 use App\Contracts\Repositories\LogAndList\CommentsRepositoryInterface as LogAndListCommentsRepositoryInterface;
 use Illuminate\Support\Facades\Log;

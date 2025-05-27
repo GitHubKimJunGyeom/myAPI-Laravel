@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services\DashBoard;
+namespace App\Services\DashBoard;
 
 use App\Contracts\Services\DashBoard\DimensionsDataServiceInterface as DashBoardDimensionsDataServiceInterface;
 use App\Contracts\Services\Google\AnalyticsServiceInterface as GoogleAnalyticsServiceInterface;

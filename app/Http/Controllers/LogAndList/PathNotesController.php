@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Contracts\Services\LogAndList\PathNotesServiceInterface as LogAndListPathNotesServiceInterface;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\LogAndList\PathNoteRequest;
 
 class PathNotesController extends Controller
 {
@@ -54,9 +55,13 @@ class PathNotesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PathNoteRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+        Log::info('Log&List Path Note created', $validatedData);
+
+        $this->logAndListPathNotesServiceInterface->store($validatedData);
+        return redirect()->route('logandlist.path-notes-data.index')->with('success', 'Path Note created successfully.');
     }
 
     /**
@@ -64,7 +69,17 @@ class PathNotesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // Fetch the path note by ID
+        $pathNote = $this->logAndListPathNotesServiceInterface->show($id);
+        Log::info('Log&List Path Note data', $pathNote->toArray());
+
+        // Prepare view data
+        $viewData = [
+            'logAndListPathNote' => $pathNote,
+        ];
+
+        // Render the view
+        return Inertia::render('LogAndList/PathNotes/show', $viewData);
     }
 
     /**
@@ -72,15 +87,28 @@ class PathNotesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // Fetch the path note by ID
+        $pathNote = $this->logAndListPathNotesServiceInterface->show($id);
+        Log::info('Log&List Path Note data for edit', $pathNote->toArray());
+        // Prepare view data
+        $viewData = [
+            'logAndListPathNote' => $pathNote,
+        ];
+        // Render the view
+        return Inertia::render('LogAndList/PathNotes/edit', $viewData);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(PathNoteRequest $request, string $id)
     {
-        //
+        //  Validate the request
+        $validatedData = $request->validated();
+        Log::info('Log&List Path Note updated', array_merge(['id' => $id], $validatedData));
+        // Update the path note
+        $this->logAndListPathNotesServiceInterface->update($validatedData, $id);
+        return redirect()->route('logandlist.path-notes-data.show', $id)->with('success', 'Path Note updated successfully.');
     }
 
     /**
@@ -88,6 +116,9 @@ class PathNotesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // Delete the path note by ID
+        $this->logAndListPathNotesServiceInterface->destroy($id);
+        Log::info('Log&List Path Note deleted', ['id' => $id]);
+        return redirect()->route('logandlist.path-notes-data.index')->with('success', 'Path Note deleted successfully.');
     }
 }

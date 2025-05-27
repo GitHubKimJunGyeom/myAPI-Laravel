@@ -15,15 +15,15 @@ use App\Contracts\Services\LogAndList\CommentsServiceInterface as LogAndListComm
 use App\Contracts\Services\LogAndList\PathNotesServiceInterface as LogAndListPathNotesServiceInterface;
 
 //Services
-use App\Http\Services\DashBoard\DimensionsDataService as DashBoardDimensionsDataService;
-use App\Http\Services\KJKPortfolio\MetricsDataService as KJKPortfolioMetricsDataService;
-use App\Http\Services\LogAndList\MetricsDataService as LogAndListMetricsDataService;
-use App\Http\Services\LogAndList\CommentsService as LogAndListCommentsService;
-use App\Http\Services\LogAndList\PathNotesService as LogAndListPathNotesService;
+use App\Services\DashBoard\DimensionsDataService as DashBoardDimensionsDataService;
+use App\Services\KJKPortfolio\MetricsDataService as KJKPortfolioMetricsDataService;
+use App\Services\LogAndList\MetricsDataService as LogAndListMetricsDataService;
+use App\Services\LogAndList\CommentsService as LogAndListCommentsService;
+use App\Services\LogAndList\PathNotesService as LogAndListPathNotesService;
 
 //Repositories
-use App\Http\Repositories\LogAndList\CommentsRepository as LogAndListCommentsRepository;
-use App\Http\Repositories\LogAndList\PathNotesRepository as LogAndListPathNotesRepository;
+use App\Repositories\LogAndList\CommentsRepository as LogAndListCommentsRepository;
+use App\Repositories\LogAndList\PathNotesRepository as LogAndListPathNotesRepository;
 
 class PlatformServiceProvider extends ServiceProvider
 {

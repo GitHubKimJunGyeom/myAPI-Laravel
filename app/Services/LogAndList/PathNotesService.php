@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Services\LogAndList;
+namespace App\Services\LogAndList;
 
 use App\Contracts\Services\LogAndList\PathNotesServiceInterface as LogAndListPathNotesServiceInterface;
 use App\Contracts\Repositories\LogAndList\PathNotesRepositoryInterface as LogAndListPathNotesRepositoryInterface;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Carbon;
 
 class PathNotesService implements LogAndListPathNotesServiceInterface
 {
@@ -41,8 +42,7 @@ class PathNotesService implements LogAndListPathNotesServiceInterface
                 'title' => $pathNote->title,
                 'content_ko' => $pathNote->content_ko,
                 'content_ja' => $pathNote->content_ja,
-                'created_at' => $pathNote->created_at,
-                'updated_at' => $pathNote->updated_at,
+                'created_at' => Carbon::parse($pathNote->created_at)->format('Y-m-d H:i:s'),
             ];
         });
         $pathNotes = $pathNotes->toArray();
@@ -84,14 +84,14 @@ class PathNotesService implements LogAndListPathNotesServiceInterface
     /**
      * Update a path note.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Array  $validatedData
      * @param  int  $id
      * @return \App\Models\LogAndList\PathNotes
      */
-    public function update($request, $id)
+    public function update($validatedData, $id)
     {
         // Update a path note using the repository
-        $pathNotes = $this->logAndListPathNotesRepositoryInterface->update($request, $id);
+        $pathNotes = $this->logAndListPathNotesRepositoryInterface->update($validatedData, $id);
 
         // Log the updated path note data
         Log::info('Log&List Path Note updated', $pathNotes->toArray());
@@ -114,40 +114,4 @@ class PathNotesService implements LogAndListPathNotesServiceInterface
 
         return $deleted;
     }
-    /**
-     * Restore a deleted path note.
-     *
-     * @param  int  $id
-     * @return \App\Models\LogAndList\PathNotes
-     */
-    public function restore($id)
-    {
-        // Restore a deleted path note using the repository
-        $pathNotes = $this->logAndListPathNotesRepositoryInterface->restore($id);
-
-        // Log the restored path note data
-        Log::info('Log&List Path Note restored', $pathNotes->toArray());
-
-        return $pathNotes;
-    }
-
-
-
-    /**
-     * Force delete a path note.
-     *
-     * @param  int  $id
-     * @return bool
-     *
-     */ 
-     public function forceDelete($id)
-     {
-        // Force delete a path note using the repository
-        $deleted = $this->logAndListPathNotesRepositoryInterface->forceDelete($id);
-
-        // Log the force deletion status
-        Log::info('Log&List Path Note force deleted', ['id' => $id, 'deleted' => $deleted]);
-
-        return $deleted;
-     }
 }

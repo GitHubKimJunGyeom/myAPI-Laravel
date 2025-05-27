@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Repositories\LogAndList;
+namespace App\Repositories\LogAndList;
 use App\Models\LogAndList\PathNotes;
 use App\Contracts\Repositories\LogAndList\PathNotesRepositoryInterface as LogAndListPathNotesRepositoryInterface;
 
@@ -30,8 +30,9 @@ class PathNotesRepository implements LogAndListPathNotesRepositoryInterface
      */
     public function index()
     {
-        return $this->pathNotes->all();
+        return $this->pathNotes->orderByDesc('created_at')->get();
     }
+    
     /**
      * Store a new path note.
      *
@@ -40,13 +41,14 @@ class PathNotesRepository implements LogAndListPathNotesRepositoryInterface
      */
     public function store($request)
     {
-        $this->pathNotes->title = $request->input('title');
-        $this->pathNotes->content_ko = $request->input('content_ko');
-        $this->pathNotes->content_ja = $request->input('content_ja');
+        $this->pathNotes->title = $request['title'] ?? null;
+        $this->pathNotes->content_ko = $request['content_ko'] ?? null;
+        $this->pathNotes->content_ja = $request['content_ja'] ?? null;
         $this->pathNotes->save();
 
         return $this->pathNotes;
     }
+
     /**
      * Get a path note by ID.
      *
@@ -57,6 +59,7 @@ class PathNotesRepository implements LogAndListPathNotesRepositoryInterface
     {
         return $this->pathNotes->findOrFail($id);
     }
+
     /**
      * Update a path note.
      *
@@ -66,14 +69,15 @@ class PathNotesRepository implements LogAndListPathNotesRepositoryInterface
      */
     public function update($request, $id)   
     {
-        $pathNotes = $this->pathNotes->findOrFail($id);
-        $pathNotes->title = $request->input('title');
-        $pathNotes->content_ko = $request->input('content_ko');
-        $pathNotes->content_ja = $request->input('content_ja');
-        $pathNotes->save();
+        $this->pathNotes = $this->pathNotes->findOrFail($id);
+        $this->pathNotes->title = $request['title'] ?? null;
+        $this->pathNotes->content_ko = $request['content_ko'] ?? null;
+        $this->pathNotes->content_ja = $request['content_ja'] ?? null;
+        $this->pathNotes->save();
 
-        return $pathNotes;
+        return $this->pathNotes;
     }
+
     /**
      * Delete a path note.
      *
@@ -85,29 +89,4 @@ class PathNotesRepository implements LogAndListPathNotesRepositoryInterface
         $pathNotes = $this->pathNotes->findOrFail($id);
         return $pathNotes->delete();
     }
-
-    /**
-     * Restore a deleted path note.
-     *
-     * @param  int  $id
-     * @return bool
-     */
-    public function restore($id)
-    {
-        $pathNotes = $this->pathNotes->withTrashed()->findOrFail($id);
-        return $pathNotes->restore();
-    }
-
-    /**
-     * Force delete a path note.
-     *
-     * @param  int  $id
-     * @return bool
-     */
-    public function forceDelete($id)
-    {
-        $pathNotes = $this->pathNotes->withTrashed()->findOrFail($id);
-        return $pathNotes->forceDelete();
-    }
-
 }

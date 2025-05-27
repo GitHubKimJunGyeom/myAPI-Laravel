@@ -9,6 +9,4 @@ interface PathNotesServiceInterface
     public function show($id);
     public function update($request, $id);
     public function destroy($id);
-    public function restore($id);
-    public function forceDelete($id);
 }

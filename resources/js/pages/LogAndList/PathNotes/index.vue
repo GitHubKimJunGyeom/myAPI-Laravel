@@ -3,7 +3,6 @@
     import { type BreadcrumbItem } from '@/types';
     import { type PathNote } from '@/types/LogAndList';
     import { Link , Head } from '@inertiajs/vue3';
-    import { Button } from '@/components/ui/button';
 
     const pageTitle = 'Log&List';
     const pageSubTitle = 'PathNote';
@@ -45,6 +44,7 @@
                                 <th class="border px-4 py-2 text-center">ID</th>
                                 <th class="border px-4 py-2 text-center">Title</th>
                                 <th class="border px-4 py-2 text-center">created at</th>
+                                <th class="border px-4 py-2 text-center">detail</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,6 +52,13 @@
                                 <td class="border px-4 py-2 text-center">{{ pathnote.id }}</td>
                                 <td class="border px-4 py-2 text-center">{{ pathnote.title }}</td>
                                 <td class="border px-4 py-2 text-center">{{ pathnote.created_at }}</td>
+                                <td class="border px-4 py-2 text-center">
+                                    <Link 
+                                        :href="route('logandlist.path-notes-data.show', pathnote.id)" 
+                                        class="text-blue-500 hover:underline">
+                                        View Details
+                                    </Link>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
