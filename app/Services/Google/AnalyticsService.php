@@ -72,12 +72,11 @@ class AnalyticsService implements GoogleAnalyticsServiceInterface
         $this->dimensionsData = Cache::get('ga_dimensions_data', []);
         $this->metricsData = Cache::get('ga_metrics_data', []);
 
-        // 캐시 없으면 API 호출
         if (empty($this->dimensionsData) || empty($this->metricsData)) {
-            log::info('캐시 없음, API 호출');
+            log::info('No cache, API call');
             $this->getAnalyticsData($this->propertyList);
         } else {
-            log::info('캐시 있음, API 호출 안함');
+            log::info('Cashed, API not called');
         }
     }
 

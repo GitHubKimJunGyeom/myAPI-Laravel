@@ -31,9 +31,7 @@ class MetricsDataService implements LogAndListMetricsDataServiceInterface
     public function getMetricsData(): array
     {
         $logAndListMetricsData = $this->googleAnalyticsServiceInterface->getLogAndListMetricsData();
-        
         Log::info('Log&List Google Analytics Metrics Data', $logAndListMetricsData);
-        
         return [
             'logAndListMetricsData' => $logAndListMetricsData
         ];

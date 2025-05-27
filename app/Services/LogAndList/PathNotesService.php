@@ -57,12 +57,8 @@ class PathNotesService implements LogAndListPathNotesServiceInterface
      */
     public function store($request)
     {
-        // Create a new path note using the repository
         $pathNotes = $this->logAndListPathNotesRepositoryInterface->store($request);
-
-        // Log the created path note data
         Log::info('Log&List Path Note created', $pathNotes->toArray());
-
         return $pathNotes;
     }
 
@@ -74,12 +70,8 @@ class PathNotesService implements LogAndListPathNotesServiceInterface
      */
     public function show($id)
     {
-        // Fetch a path note by ID using the repository
         $pathNotes = $this->logAndListPathNotesRepositoryInterface->show($id);
-
-        // Log the fetched path note data
         Log::info('Log&List Path Note fetched', $pathNotes->toArray());
-
         return $pathNotes;
     }
 
@@ -92,15 +84,11 @@ class PathNotesService implements LogAndListPathNotesServiceInterface
      */
     public function update($validatedData, $id)
     {
-        // Update a path note using the repository
         $pathNotes = $this->logAndListPathNotesRepositoryInterface->update($validatedData, $id);
-
-        // Log the updated path note data
         Log::info('Log&List Path Note updated', $pathNotes->toArray());
-
         return $pathNotes;
     }
-    
+
     /**
      * Delete a path note.
      *
@@ -109,12 +97,8 @@ class PathNotesService implements LogAndListPathNotesServiceInterface
      */
     public function destroy($id)
     {
-        // Delete a path note using the repository
         $deleted = $this->logAndListPathNotesRepositoryInterface->destroy($id);
-
-        // Log the deletion status
         Log::info('Log&List Path Note deleted', ['id' => $id, 'deleted' => $deleted]);
-
         return $deleted;
     }
 }
