@@ -42,7 +42,7 @@ Route::group(['prefix' => 'logandlist', 'as' => 'logandlist.'], function () {
     Route::resource('comments-data', LogAndListCommentsController::class)->only('index');
     Route::resource('path-notes-data', LogAndListPathNotesController::class)
         ->parameter('path-notes-data', 'id')
-        ->only('index', 'create', 'store', 'show' ,'edit', 'update', 'destroy');
+        ->only('index', 'create', 'store', 'show' ,'edit', 'update', 'destroy', 'getAllPathNote');
 });
 
 

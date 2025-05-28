@@ -4,8 +4,8 @@ namespace App\Services\LogAndList;
 
 use App\Contracts\Services\LogAndList\PathNotesServiceInterface as LogAndListPathNotesServiceInterface;
 use App\Contracts\Repositories\LogAndList\PathNotesRepositoryInterface as LogAndListPathNotesRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Carbon;
 
 class PathNotesService implements LogAndListPathNotesServiceInterface
 {
@@ -26,27 +26,15 @@ class PathNotesService implements LogAndListPathNotesServiceInterface
         $this->logAndListPathNotesRepositoryInterface = $logAndListPathNotesRepositoryInterface;
     }
 
-    // Add your service methods here
     /**
      * Get all path notes.
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function index()
+    public function index(): Collection
     {
-        $pathNoteCollection = $this->logAndListPathNotesRepositoryInterface->index();
-        $pathNotes = $pathNoteCollection->map(function ($pathNote) {
-            return [
-                'id' => $pathNote->id,
-                'title' => $pathNote->title,
-                'content_ko' => $pathNote->content_ko,
-                'content_ja' => $pathNote->content_ja,
-                'created_at' => Carbon::parse($pathNote->created_at)->format('Y-m-d H:i:s'),
-            ];
-        });
-        $pathNotes = $pathNotes->toArray();
-        Log::info('Log&List Path Note data', $pathNotes);
-        return $pathNotes;
+        Log::info('Log&List Path Note data');
+        return $this->logAndListPathNotesRepositoryInterface->index();
     }
 
     /**

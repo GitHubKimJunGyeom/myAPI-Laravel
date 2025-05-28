@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\LogAndList;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Contracts\Services\LogAndList\PathNotesServiceInterface as LogAndListPathNotesServiceInterface;
+use App\Http\Resources\LogAndList\PathNoteResource as LogAndListPathNoteResource;
 use Illuminate\Support\Facades\Log;
 use App\Http\Requests\LogAndList\PathNoteRequest;
 
@@ -31,10 +31,10 @@ class PathNotesController extends Controller
      */
     public function index()
     {
-        $logAndListPathNotesList = $this->logAndListPathNotesServiceInterface->index();
-        Log::info('Log&List Path Note data', $logAndListPathNotesList);
+        $logAndListPathNoteCollection = $this->logAndListPathNotesServiceInterface->index();
+        $logAndListPathNoteList = LogAndListPathNoteResource::collection($logAndListPathNoteCollection)->toArray(request());
         $viewData = [
-            'logAndListPathNotesList' => $logAndListPathNotesList,
+            'logAndListPathNotesList' => $logAndListPathNoteList,
         ];
         return Inertia::render('LogAndList/PathNotes/index', $viewData);
     }
@@ -63,10 +63,11 @@ class PathNotesController extends Controller
      */
     public function show(string $id)
     {
-        $pathNote = $this->logAndListPathNotesServiceInterface->show($id);
-        Log::info('Log&List Path Note data', $pathNote->toArray());
+        $logAndListPathNoteCollection = $this->logAndListPathNotesServiceInterface->show($id);
+        $logAndListPathNote = new LogAndListPathNoteResource($logAndListPathNoteCollection)->toArray(request());
+        Log::info('Log&List Path Note data', $logAndListPathNote);
         $viewData = [
-            'logAndListPathNote' => $pathNote,
+            'logAndListPathNote' => $logAndListPathNote,
         ];
         return Inertia::render('LogAndList/PathNotes/show', $viewData);
     }
@@ -76,10 +77,11 @@ class PathNotesController extends Controller
      */
     public function edit(string $id)
     {
-        $pathNote = $this->logAndListPathNotesServiceInterface->show($id);
-        Log::info('Log&List Path Note data for edit', $pathNote->toArray());
+        $logAndListPathNoteCollection = $this->logAndListPathNotesServiceInterface->show($id);
+        $logAndListPathNote = new LogAndListPathNoteResource($logAndListPathNoteCollection)->toArray(request());
+        Log::info('Log&List Path Note data for edit', $logAndListPathNote);
         $viewData = [
-            'logAndListPathNote' => $pathNote,
+            'logAndListPathNote' => $logAndListPathNote,
         ];
         return Inertia::render('LogAndList/PathNotes/edit', $viewData);
     }
@@ -103,5 +105,12 @@ class PathNotesController extends Controller
         $this->logAndListPathNotesServiceInterface->destroy($id);
         Log::info('Log&List Path Note deleted', ['id' => $id]);
         return redirect()->route('logandlist.path-notes-data.index')->with('success', 'Path Note deleted successfully.');
+    }
+
+    
+    public function getAllPathNote():Array
+    {
+        $logAndListPathNoteCollection = $this->logAndListPathNotesServiceInterface->index();
+        return LogAndListPathNoteResource::collection($logAndListPathNoteCollection)->toArray(request());
     }
 }
