@@ -52,6 +52,20 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+
+    pgsql:
+        image: postgres:14
+        restart: always
+        ports:
+            - '${FORWARD_DB_PORT:-5432}:5432'
+        environment:
+            POSTGRES_DB: ${DB_DATABASE}
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+        volumes:
+            - pgsql-data:/var/lib/postgresql/data
+        networks:
+            - sail
     redis:
         image: 'redis:alpine'
         ports:
@@ -116,4 +130,6 @@ volumes:
     sail-redis:
         driver: local
     sail-meilisearch:
+        driver: local
+    pgsql-data:
         driver: local
