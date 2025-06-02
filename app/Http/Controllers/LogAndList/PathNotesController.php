@@ -110,7 +110,15 @@ class PathNotesController extends Controller
     
     public function getAllPathNote():Array
     {
+        Log::info('Log&List Get All Path Note');
         $logAndListPathNoteCollection = $this->logAndListPathNotesServiceInterface->index();
         return LogAndListPathNoteResource::collection($logAndListPathNoteCollection)->toArray(request());
+    }
+
+    public function getPathNote(string $id):Array
+    {
+        Log::info('Log&List Get Path Note', ['id' => $id]);
+        $logAndListPathNoteCollection = $this->logAndListPathNotesServiceInterface->show($id);
+        return  new LogAndListPathNoteResource($logAndListPathNoteCollection)->toArray(request());
     }
 }
