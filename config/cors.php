@@ -21,7 +21,7 @@ return [
 
     'allowed_origins' => [
         'http://localhost:3000',
-        'https://myapiec2.click'
+        'https://log-and-list.vercel.app'
     ],
 
     'allowed_origins_patterns' => [],
