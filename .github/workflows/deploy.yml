@@ -22,6 +22,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
             cd /var/www/myAPI
+            git remote set-url origin git@github.com:GitHubKimJunGyeom/myAPI.git
             git pull origin main
 
             # 백엔드 준비
@@ -29,8 +30,8 @@ jobs:
             php artisan migrate --force
 
             # 프론트엔드 빌드
-            pnpm install
-            pnpm run build
+            npm install
+            npm run build
 
             # 캐시 최적화
             php artisan config:cache
