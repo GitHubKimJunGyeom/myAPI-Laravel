@@ -107,7 +107,11 @@ class PathNotesController extends Controller
         return redirect()->route('logandlist.path-notes-data.index')->with('success', 'Path Note deleted successfully.');
     }
 
-    
+    /**
+     * Get all path notes.
+     *
+     * @return array
+     */
     public function getAllPathNote():Array
     {
         Log::info('Log&List Get All Path Note');
@@ -115,6 +119,12 @@ class PathNotesController extends Controller
         return LogAndListPathNoteResource::collection($logAndListPathNoteCollection)->toArray(request());
     }
 
+    /**
+     * Get a specific path note by ID.
+     *
+     * @param string $id
+     * @return array
+     */
     public function getPathNote(string $id):Array
     {
         Log::info('Log&List Get Path Note', ['id' => $id]);

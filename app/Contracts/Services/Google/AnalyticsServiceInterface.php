@@ -15,5 +15,4 @@ interface AnalyticsServiceInterface
     
     // Log&List(Metric)
     public function getLogAndListMetricsData(): array;
-    
 }

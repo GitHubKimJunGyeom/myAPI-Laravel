@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\LogAndList;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Log;
 use App\Contracts\Services\LogAndList\MetricsDataServiceInterface as LogAndListMetricsDataServiceInterface;
