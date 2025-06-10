@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class DashboardTest extends TestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     public function test_guests_are_redirected_to_the_login_page()
     {

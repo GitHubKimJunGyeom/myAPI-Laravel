@@ -2,13 +2,23 @@
 
 namespace Tests\Feature\Auth;
 
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\myAPI\User;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Artisan;
 
 class AuthenticationTest extends TestCase
 {
-    use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // 멀티 DB 환경이라면 추가 DB도 초기화
+        Artisan::call('migrate:fresh', [
+            '--database' => 'myAPI',
+            '--path' => 'database/migrations/myAPI',
+        ]);
+    }
 
     public function test_login_screen_can_be_rendered()
     {
@@ -19,14 +29,17 @@ class AuthenticationTest extends TestCase
 
     public function test_users_can_authenticate_using_the_login_screen()
     {
-        $user = User::factory()->create();
+         $user = User::factory()->create([
+            'password' => bcrypt('password'), // 중요!
+        ]);
 
         $response = $this->post('/login', [
             'email' => $user->email,
             'password' => 'password',
         ]);
 
-        $this->assertAuthenticated();
+        $response->assertSessionHasNoErrors(); // 로그인 성공 확인
+        $this->assertAuthenticatedAs($user);   // 이 시점에 인증 완료돼야 함
         $response->assertRedirect(route('dashboard-dimensions-data', absolute: false));
     }
 

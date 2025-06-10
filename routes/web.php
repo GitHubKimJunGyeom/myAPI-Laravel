@@ -44,8 +44,3 @@ Route::group(['prefix' => 'logandlist', 'as' => 'logandlist.'], function () {
         ->parameter('path-notes-data', 'id')
         ->only('index', 'create', 'store', 'show' ,'edit', 'update', 'destroy');
 });
-
-
-// Route::get('dashboard-dimensions-data', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard-dimensions-data');

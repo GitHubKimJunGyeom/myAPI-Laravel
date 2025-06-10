@@ -6,12 +6,19 @@ namespace App\Models\myAPI;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Database\Factories\myAPI\UserFactory;
 
 class User extends Authenticatable
 {
+    protected $connection = 'myAPI';
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    protected static function newFactory()
+    {
+        return UserFactory::new();
+    }
+    
     /**
      * The attributes that are mass assignable.
      *
