@@ -20,6 +20,7 @@ class CommentsRepository implements LogAndListCommentsRepositoryInterface
     {
         $this->comments = $comments;
     }
+
     /**
      * Get all comments.
      *
@@ -27,26 +28,7 @@ class CommentsRepository implements LogAndListCommentsRepositoryInterface
      */
     public function index()
     {
-        return $this->comments->all();
-    }
-
-    /**
-     * Store a new comment.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Database\Eloquent\Model
-     */
-    public function store($request)
-    {
-        $this->comments->user_id = $request->user()->id;
-        $this->comments->nickname = $request->input('nickname');
-        $this->comments->password_hash = bcrypt($request->input('password'));
-        $this->comments->content = $request->input('content');
-        $this->comments->page_id = $request->input('page_id');
-        $this->comments->parent_id = $request->input('parent_id');
-        $this->comments->save();
-
-        return $this->comments;
+        return $this->comments->orderByDesc('updated_at')->get();
     }
 
     /**
@@ -63,18 +45,21 @@ class CommentsRepository implements LogAndListCommentsRepositoryInterface
     /**
      * Update a comment.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  int  $id
      * @return \App\Models\LogAndList\Comments
      */
     public function update($request, $id)
     {
         $comment = $this->comments->findOrFail($id);
-        $comment->content = $request->input('content');
+        $comment->nickname = $request['nickname'];
+        $comment->password_hash = bcrypt($request['password']);
+        $comment->content = $request['content'];
         $comment->save();
 
         return $comment;
     }
+
     /**
      * Delete a comment.
      *
@@ -111,16 +96,55 @@ class CommentsRepository implements LogAndListCommentsRepositoryInterface
         return $comment->forceDelete();
     }
 
+    //////////////////////////////////////////////////////////////////////////
+    // ** API methods ** //
+    //////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Store a new comment.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function storeComment($request)
+    {
+        $this->comments->nickname = $request['nickname'];
+        $this->comments->password_hash = bcrypt($request['password']);
+        $this->comments->content = $request['content'];
+        $this->comments->page_id = $request['page_id'];
+        // $this->comments->parent_id = $request['parent_id'];
+        $this->comments->save();
+        return $this->comments;
+    }
+
+    /**
+     * Update a comment.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \App\Models\LogAndList\Comments
+     */
+    public function updateComment($request, $id)
+    {
+        $comment = $this->comments->findOrFail($id);
+        $this->comments->nickname = $request['nickname'];
+        $this->comments->password_hash = bcrypt($request['password']);
+        $this->comments->content = $request['content'];
+        $comment->save();
+        return $comment;
+    }
+
     /**
      * Get comments by page ID.
      *
      * @param  string  $pageId
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getCommentsByPageId($parentId)
+    public function getCommentsByPageId(string $pageId)
     {
-        return $this->comments->where('parent_id', $parentId)->get();
+        return $this->comments->where('page_id', $pageId)->get();
     }
+    
     /**
      * Get comments by page ID and parent ID.
      *
@@ -128,9 +152,10 @@ class CommentsRepository implements LogAndListCommentsRepositoryInterface
      * @param  int  $parentId
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getCommentsByPageIdAndParentId($pageId, $parentId)
+    public function getCommentsByPageIdAndParentId(string $pageId, int $parentId)
     {
-        return $this->comments->where('page_id', $pageId)
+        return $this->comments
+            ->where('page_id', $pageId)
             ->where('parent_id', $parentId)
             ->get();
     }

@@ -28,36 +28,9 @@ class CommentsService implements LogAndListCommentsServiceInterface
      */
     public function index()
     {
-        $commentCollection = $this->logAndListCommentsRepositoryInterface->index();
-        $commentCollection = $commentCollection->map(function ($comment) {
-            return [
-                'id' => $comment->id,
-                'user_id' => $comment->user_id,
-                'nickname' => $comment->nickname,
-                'password_hash' => $comment->password_hash,
-                'content' => $comment->content,
-                'page_id' => $comment->page_id,
-                'parent_id' => $comment->parent_id,
-                'created_at' => Carbon::parse($comment->created_at)->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::parse($comment->updated_at)->format('Y-m-d H:i:s')
-            ];
-        });
-        $commentArray = $commentCollection->toArray();
-        Log::info('Log&List Comments data', $commentArray);
-        return $commentArray;
+        return $this->logAndListCommentsRepositoryInterface->index();
     }
     
-    /**
-     * Store a new comment.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Database\Eloquent\Model
-     */
-    public function store($request)
-    {
-        return $this->logAndListCommentsRepositoryInterface->store($request);
-    }
-
     /**
      * Get a comment by ID.
      *
@@ -113,6 +86,18 @@ class CommentsService implements LogAndListCommentsServiceInterface
     {
         return $this->logAndListCommentsRepositoryInterface->forceDelete($id);
     }
+
+    /**
+     * Post a new comment.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function postComment($request)
+    {
+        return $this->logAndListCommentsRepositoryInterface->storeComment($request);
+    }
+    
     /**
      * Get all comments for a specific page ID.
      *

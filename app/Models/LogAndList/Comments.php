@@ -20,13 +20,13 @@ class Comments extends Model
         'parent_id',
     ];
 
-    /**
-     * Login User
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    // /**
+    //  * Login User
+    //  */
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
 
     /**
      * Parent Comment

@@ -5,12 +5,14 @@ namespace App\Contracts\Services\LogAndList;
 interface CommentsServiceInterface
 {
     public function index();
-    public function store($request);
     public function show($id);
     public function update($request, $id);
     public function destroy($id);
     public function restore($id);
     public function forceDelete($id);
-    public function getCommentsByPageId($pageId);
+
+    // API methods
+    public function postComment($request);
+    public function getCommentsByPageId(string $pageId);
     public function getCommentsByPageIdAndParentId($pageId, $parentId);
 }

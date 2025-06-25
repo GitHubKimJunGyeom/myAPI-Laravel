@@ -11,7 +11,7 @@ class CommentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,29 @@ class CommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nickname' => 'required|string',
+            'password_hash' => 'required|string',
+            'content' => 'required|string',
+            'page_id' => 'required|string',
+            'parent_id' => 'nullable|integer',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'nickname.required' => 'The nickname is a required field.',
+            'password_hash.required' => 'The password hash is a required field.',
+            'content.required' => 'The content is a required field.',
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'title' => 'Title',
+            'content_ko' => 'Content(Korean)',
+            'content_ja' => 'Content(Japanese)',
         ];
     }
 }
