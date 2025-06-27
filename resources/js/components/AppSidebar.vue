@@ -12,7 +12,8 @@ import {
         NotebookTabs,
         Camera,
         ExternalLink,
-        TvMinimalPlay
+        TvMinimalPlay,
+        // LogOut
     } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
@@ -90,6 +91,10 @@ const footerNavItems: NavItem[] = [
 
         <SidebarFooter>
             <NavFooter :items="footerNavItems" />
+            <Link class="block w-full" method="post" :href="route('logout')" as="button">
+                <!-- <LogOut class="mr-2 h-4 w-4" /> -->
+                Log out
+            </Link>
         </SidebarFooter>
     </Sidebar>
     <slot />
