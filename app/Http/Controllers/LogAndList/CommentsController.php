@@ -29,6 +29,21 @@ class CommentsController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $logAndListCommentCollection = $this->logAndListCommentsServiceInterface->index();
+        $logAndListComment = LogAndListCommentResource::collection($logAndListCommentCollection)->toArray(request());
+        Log::info('Log&List Comments data', $logAndListComment);
+        $viewData = [
+            'logAndListCommentsList' => $logAndListComment,
+        ];
+        return Inertia::render('LogAndList/Comments/index', $viewData);
+    }
+
+
+    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)

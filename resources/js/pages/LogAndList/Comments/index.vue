@@ -45,7 +45,7 @@
                         <tbody>
                             <tr v-for="comment in logAndListCommentsList" :key="comment.id" class="hover:bg-gray-50">
                                 <td class="border px-4 py-2 text-center">{{ comment.id }}</td>
-                                <td class="border px-4 py-2 text-center">{{ comment.user_id }}</td>
+                                <td class="border px-4 py-2 text-center">{{ comment.user_id ?? 'nothing'}}</td>
                                 <td class="border px-4 py-2 text-center">{{ comment.nickname }}</td>
                                 <td class="border px-4 py-2 text-center">{{ comment.content }}</td>
                                 <td class="border px-4 py-2 text-center">{{ comment.page_id }}</td>
