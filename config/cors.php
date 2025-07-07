@@ -21,7 +21,7 @@ return [
 
     'allowed_origins' => [
         'http://localhost:3000',
-        'https://log-and-list.vercel.app'
+        'https://www.log-and-list.com'
     ],
 
     'allowed_origins_patterns' => [],

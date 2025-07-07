@@ -43,7 +43,7 @@ const footerNavItems: NavItem[] = [
     },  
     {   
         title: 'Log&List',
-        href: 'https://log-and-list.vercel.app',
+        href: 'https://www.log-and-list.com',
         icon: NotebookTabs,
     },  
     {
