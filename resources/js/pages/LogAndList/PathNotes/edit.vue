@@ -39,7 +39,7 @@
     });
 
     const submit = () => {
-        form.patch(route('logandlist.path-notes-data.update', form.id), {
+        form.put(route('logandlist.path-notes-data.update', form.id), {
             onSuccess: () => {
                 console.log('Path Note updated successfully!');
             },
