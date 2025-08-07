@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { Line } from 'vue-chartjs'
+    import { Line } from 'vue-chartjs';
     import {
     Chart as ChartJS,
     Title,
@@ -9,8 +9,8 @@
     LineElement,
     CategoryScale,
     LinearScale,
-    PointElement,
-    } from 'chart.js'
+    PointElement
+    } from 'chart.js';
 
 // Chart.js에 사용할 컴포넌트 등록
 ChartJS.register(Title, Tooltip, Legend, BarElement,LineElement, CategoryScale, LinearScale, PointElement);
@@ -59,12 +59,12 @@ const chartOptions = {
       display: true,
       text: nameChange(props.projectName),
       font: {
-        size: 24,  // 폰트 크기
-        weight: 'bold',  // 폰트 두께 (예: 'normal', 'bold', 'bolder' 등)
-        family: 'Arial',  // 폰트 가족 (선택 사항)
-        lineHeight: 1.2,  // 줄 간격
+        size: 24,           // 폰트 크기
+        weight: 'bold',     // 폰트 두께 (예: 'normal', 'bold', 'bolder' 등)
+        family: 'Arial',    // 폰트 가족 (선택 사항)
+        lineHeight: 1.2,    // 줄 간격
       },
-      color: '#000000',  // 텍스트 색상
+      color: '#000000',     // 텍스트 색상
     },
     tooltip: {
       callbacks: {
